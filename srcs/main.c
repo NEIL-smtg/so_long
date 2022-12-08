@@ -12,26 +12,30 @@
 
 #include "so_long.h"
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
+typedef struct s_data
+{
+	void	*winptr;
+	void	*mlxptr;
+} t_data;
+
+int	doit(int key, t_data *data)
+{
+	ft_printf("hi");
+	mlx_pixel_put(data->mlxptr, data->winptr, 100, 100, 0xFFFFFF);
+	return (0);
+}
 
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_data	data;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	img.img = mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
-	return (0);
+	mlx_ptr = mlx_init();
+	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "so fucking long");
+	mlx_pixel_put(mlx_ptr, win_ptr, 250, 250, 0xFFFFFF);
+	data.mlxptr = mlx_ptr;
+	data.winptr = win_ptr;
+	mlx_key_hook(win_ptr, doit, &data);
+	mlx_loop(mlx_ptr);
 }

@@ -15,14 +15,15 @@ LIBFT		=	libft.a
 CC			=	gcc
 RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror -Imlx
-MLXFLAGS	=	-L /usr/local/lib/libmlx.a
-# MLXFLAGS	=	-L minilibx/minilibx-linux/libmlx.a
+# MLXFLAGS	=	-L /usr/local/lib/libmlx.a
+MLXFLAGS	=	-L minilibx/minilibx-linux/libmlx_Linux.a
 SRCS_FILES	=	main
 SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 OBJS		= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))
 SRCS_DIR	=	srcs/
 LIBFT_DIR	=	libft
 OBJS_DIR	=	objs/
+fsanitize	= -fsanitize=address -g
 
 all:			
 				mkdir -p $(OBJS_DIR)
@@ -34,10 +35,10 @@ bonus:
 				make $(NAME)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
-				$(CC) $(CFLAGS) -c $< -o $@
+				$(CC) -c $< -o $@
 
 $(NAME):		$(OBJS)
-				$(CC) $(CFLAGS) $(LIBFT_DIR)/$(LIBFT) $(OBJS) $(MLXFLAGS) -lmlx -lXext -lX11 -o $(NAME)
+				$(CC) $(OBJS) $(LIBFT_DIR)/$(LIBFT) $(MLXFLAGS) -lmlx -lXext -lX11 -o $(NAME)
 
 libft:
 				make -C $(LIBFT_DIR)
@@ -53,3 +54,6 @@ fclean:			clean
 re:				fclean all
 
 .PHONY:			all bonus libft clean fclean re
+
+norm:
+	norminette -R CheckForbiddenSourceHeader $(SRCS)
