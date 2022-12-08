@@ -16,4 +16,10 @@
 # include "../Libft/libft.h"
 # include <mlx.h>
 
+typedef struct	s_init_ptr
+{
+	void	*win_ptr;
+	void	*mlx_ptr;
+}	t_init_ptr;
+
 #endif

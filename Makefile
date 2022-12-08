@@ -38,7 +38,7 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 				$(CC) -c $< -o $@
 
 $(NAME):		$(OBJS)
-				$(CC) $(OBJS) $(LIBFT_DIR)/$(LIBFT) $(MLXFLAGS) -lmlx -lXext -lX11 -o $(NAME)
+				$(CC) $(fsanitize) $(OBJS) $(LIBFT_DIR)/$(LIBFT) $(MLXFLAGS) -lmlx -lXext -lX11 -o $(NAME)
 
 libft:
 				make -C $(LIBFT_DIR)
