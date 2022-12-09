@@ -17,13 +17,13 @@ RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror -Imlx
 # MLXFLAGS	=	-L /usr/local/lib/libmlx.a
 MLXFLAGS	=	-L minilibx/minilibx-linux/libmlx_Linux.a
-SRCS_FILES	=	main
+SRCS_FILES	=	main parse_map
 SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 OBJS		= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))
 SRCS_DIR	=	srcs/
 LIBFT_DIR	=	libft
 OBJS_DIR	=	objs/
-fsanitize	= -fsanitize=address -g
+FSANITIZE	= -fsanitize=address -g
 
 all:			
 				mkdir -p $(OBJS_DIR)
@@ -38,7 +38,7 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 				$(CC) -c $< -o $@
 
 $(NAME):		$(OBJS)
-				$(CC) $(fsanitize) $(OBJS) $(LIBFT_DIR)/$(LIBFT) $(MLXFLAGS) -lmlx -lXext -lX11 -o $(NAME)
+				$(CC) $(FSANITIZE) $(OBJS) $(LIBFT_DIR)/$(LIBFT) $(MLXFLAGS) -lmlx -lXext -lX11 -o $(NAME)
 
 libft:
 				make -C $(LIBFT_DIR)
