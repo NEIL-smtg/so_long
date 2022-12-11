@@ -12,117 +12,69 @@
 
 #include "so_long.h"
 
-void	prompt_error(int fd, char *line)
+void	ft_check_map_path(char *path)
 {
-	ft_printf("Map Error!\n");
-	close(fd);
-	if (!line)
-		free(line);
+	int	map_fd;
+
+	map_fd = open(path, O_RDONLY);
+	if (map_fd <= 0)
+	{
+		ft_printf("Wrong path !\n");
+		close(map_fd);
+		exit(EXIT_FAILURE);
+	}
+	close(map_fd);
+}
+
+void	set_map_vars(t_map *map)
+{
+	int	h;
+
+	h = -1;
+	while (map->mapping[++h])
+		map->h = h + 1;
+	map->w = ft_strlen(map->mapping[0]);
+}
+
+void	valid_map(t_map *map)
+{
+	check_len(map);
+	check_collectible_exit(map);
+	check_start_pos(map);
+	check_invalid_ch(map);
+}
+
+void	free_liness_exit(char *line1, char *line2)
+{
+	free(line1);
+	free(line2);
+	ft_printf("Empty line !\n");
 	exit(EXIT_FAILURE);
 }
 
-void	init_mp_status(map_status *mp_s)
+void	get_map(char *path, t_win *win)
 {
-	mp_s->collectibles = 0;
-	mp_s->empty = 0;
-	mp_s->exit = 0;
-	mp_s->pos = 0;
-	mp_s->wall = 0;
-	mp_s->len = 0;
-}
+	int		fd;
+	char	*partial;
+	char	*whole;
 
-int	check_mp_line(char *line, map_status *mp_s)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (line[i])
-	{
-		if (line[i] == '0')
-			mp_s->empty++;
-		else if (line[i] == '1')
-			mp_s->wall++;
-		else if (line[i] == 'C')
-			mp_s->collectibles++;
-		else if (line[i] == 'E')
-			mp_s->exit++;
-		else if (line[i] == 'P')
-			mp_s->pos++;
-		else
-			break ;
-		++i;
-	}
-	if (line[i] == 0)
-		return (1);
-	else if (line[i + 1] == '\n' || line[i + 1] == 0)
-		return (1);
-	return (0);
-}
-
-int	check_line_size(int *len, char *line)
-{
-	int	size;
-
-	size = ft_strlen(line);
-	if (line[size - 1] == '\n')
-		size--;
-	if (*len != size)
-		return (0);
-	*len = size;
-	return (1);
-}
-
-void	check_map(char *mp)
-{
-	int			fd;
-	char		*line;
-	map_status	mp_s;
-
-	fd = open(mp, O_RDONLY);
-	init_mp_status(&mp_s);
+	fd = open(path, O_RDONLY);
+	whole = ft_calloc(1, sizeof(char));
 	while (1)
 	{
-		line = get_next_line(fd);
-		if (!line)
+		partial = get_next_line(fd);
+		if (!partial)
 			break ;
-		if (line[ft_strlen(line) - 1] != '\n')
-			mp_s.len = ft_strlen(line);
-		if (mp_s.len != 0)
-			if (mp_s.len != ft_strlen(line))
-				prompt_error(fd, line);
-		if (!check_mp_line(line, &mp_s))
-			prompt_error(fd, line);
-		mp_s.len = ft_strlen(line);
-		free(line);
+		if (partial[ft_strlen(partial) - 2] == 13)
+			partial[ft_strlen(partial) - 2] = 10;
+		if (*partial == 10)
+			free_liness_exit(whole, partial);
+		whole = gnl_strjoin(whole, partial);
+		free(partial);
 	}
-	close(fd);
-	if (!mp_s.collectibles || !mp_s.exit || !mp_s.pos)
-		prompt_error(fd, NULL);
-}
-
-void	ft_parse_map(int ac, char **av)
-{
-	char	*map;
-
-	if (ac == 2)
-	{
-		map = av[1];
-		if (ft_strncmp(map, "map", 3) != 0 || map[4])
-		{
-			ft_printf("Wrong Map Argument!\n");
-			exit(EXIT_FAILURE);
-		}
-		if (map[3] == '2')
-			check_map("maps/map2.ber");
-		else if (map[3] == '3')
-			check_map("maps/map3.ber");
-		else if (map[3] == '4')
-			check_map("maps/map4.ber");
-		else
-			check_map("maps/map1.ber");
-	}
-	else
-		check_map("maps/map1.ber");
+	win->map = ft_calloc(1, sizeof(t_map));
+	win->map->mapping = ft_split(whole, '\n');
+	free(whole);
+	set_map_vars(win->map);
+	valid_map(win->map);
 }

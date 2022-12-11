@@ -14,10 +14,16 @@
 
 int	main(int ac, char **av)
 {
-	t_init_ptr	ptr;
+	t_win	win;
 
-	ft_parse_map(ac, av);
-	ptr.mlx_ptr = mlx_init();
-	ptr.win_ptr = mlx_new_window(ptr.mlx_ptr, 500, 300, "So Looooog");
-	mlx_loop(ptr.mlx_ptr);
+	if (ac == 2)
+	{
+		ft_check_map_path(av[1]);
+		get_map(av[1], &win);
+	}
+	else
+	{
+		ft_printf("map path not found\n");
+		exit(EXIT_FAILURE);
+	}
 }

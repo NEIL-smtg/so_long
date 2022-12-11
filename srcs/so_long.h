@@ -14,26 +14,37 @@
 # define SO_LONG
 
 # include "../Libft/libft.h"
+# include "../Libft/get_next_line/get_next_line_bonus.h"
 # include <fcntl.h>
 # include <mlx.h>
 
-typedef struct	s_init_ptr
+typedef struct s_map
 {
-	void	*win_ptr;
-	void	*mlx_ptr;
-}	t_init_ptr;
+	char	**mapping;
+	int		h;
+	int		w;
+	int		empty;
+	int		wall;
+	int		c;
+	int		e;
+	int		p;
+} t_map;
 
-typedef struct s_map_status
+typedef struct s_win
 {
-	int	empty;
-	int	wall;
-	int	collectibles;
-	int	exit;
-	int	pos;
-	int	len;
-} map_status;
+	void	*mlx;
+	void	*win;
+	t_map	*map;
+} t_win;
 
+//map
+void	ft_check_map_path(char *path);
+void	get_map(char *path, t_win *win);
 
-void	ft_parse_map(int ac, char **av);
+//check valid map
+void	check_len(t_map *map);
+void	check_collectible_exit(t_map *map);
+void	check_start_pos(t_map *map);
+void	check_invalid_ch(t_map *map);
 
 #endif
