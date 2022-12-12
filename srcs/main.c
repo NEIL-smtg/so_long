@@ -23,10 +23,11 @@ void	init(t_win *win, int *x, int *y)
 	win->player->p_y = 0;
 	win->player->score = 0;
 	win->player->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/player.xpm", x, y);
-	win->bg = mlx_xpm_file_to_image(win->mlx, "xpm/bg.xpm", x, y);
-	win->map->empty_img = mlx_xpm_file_to_image(win->mlx, "xpm/zero.xpm", x, y);
-	win->map->w_img = mlx_xpm_file_to_image(win->mlx, "xpm/wall.xpm", x, y);
+	// win->bg = mlx_xpm_file_to_image(win->mlx, "xpm/bg.xpm", x, y);
+	// win->map->empty_img = mlx_xpm_file_to_image(win->mlx, "xpm/zero.xpm", x, y);
+	// win->map->w_img = mlx_xpm_file_to_image(win->mlx, "xpm/wall.xpm", x, y);
 	win->map->c_img = mlx_xpm_file_to_image(win->mlx, "xpm/coin.xpm", x, y);
+	// win->map->ex_img = mlx_xpm_file_to_image(win->mlx, "xpm/exit.xpm", x, y);
 }
 
 int	main(int ac, char **av)

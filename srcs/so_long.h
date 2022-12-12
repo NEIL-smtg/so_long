@@ -26,21 +26,27 @@ typedef struct s_player
 	void	*p_img;
 } t_player;
 
+typedef struct	s_exit_pos
+{
+	int	x;
+	int	y;
+} t_exit_pos;
 
 typedef struct s_map
 {
-	char	**mapping;
-	int		h;
-	int		w;
-	int		empty;
-	int		wall;
-	int		c;
-	int		e;
-	int		p;
-	void	*c_img;
-	void	*empty_img;
-	void	*w_img;
-	void	*ex_img;
+	char		**mapping;
+	int			h;
+	int			w;
+	int			empty;
+	int			wall;
+	int			c;
+	int			e;
+	int			p;
+	void		*c_img;
+	void		*empty_img;
+	void		*w_img;
+	void		*ex_img;
+	t_exit_pos	ex_pos;
 } t_map;
 
 typedef struct s_win
@@ -65,5 +71,8 @@ void	check_start_pos(t_map *map);
 void	check_invalid_ch(t_map *map);
 void	free_map_exit(t_map *map);
 void	good_map_structure(t_map *map);
+
+//render map
+void	render_map(t_win *win);
 
 #endif
