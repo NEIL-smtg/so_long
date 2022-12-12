@@ -18,6 +18,15 @@
 # include <fcntl.h>
 # include <mlx.h>
 
+typedef struct s_player
+{
+	int		p_x;
+	int		p_y;
+	int		score;
+	void	*p_img;
+} t_player;
+
+
 typedef struct s_map
 {
 	char	**mapping;
@@ -28,13 +37,21 @@ typedef struct s_map
 	int		c;
 	int		e;
 	int		p;
+	void	*c_img;
+	void	*empty_img;
+	void	*w_img;
+	void	*ex_img;
 } t_map;
 
 typedef struct s_win
 {
-	void	*mlx;
-	void	*win;
-	t_map	*map;
+	void		*mlx;
+	void		*win;
+	int			win_h;
+	int			win_w;
+	void		*bg;
+	t_map		*map;
+	t_player	*player;
 } t_win;
 
 //map
@@ -46,5 +63,7 @@ void	check_len(t_map *map);
 void	check_collectible_exit(t_map *map);
 void	check_start_pos(t_map *map);
 void	check_invalid_ch(t_map *map);
+void	free_map_exit(t_map *map);
+void	good_map_structure(t_map *map);
 
 #endif
