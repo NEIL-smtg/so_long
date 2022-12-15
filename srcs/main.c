@@ -12,6 +12,27 @@
 
 #include "so_long.h"
 
+void	get_player_pos(t_win *win)
+{
+	int	i;
+	int	j;
+	
+	i = -1;
+	while (win->map->mapping[++i])
+	{
+		j = -1;
+		while (win->map->mapping[i][++j])
+		{
+			if (win->map->mapping[i][j] == 'P')
+			{
+				win->player->p_x = j;
+				win->player->p_y = i;
+				return ;
+			}
+		}
+	}
+}
+
 void	init(t_win *win, int *x, int *y)
 {
 	win->win_h = win->map->h * 64;
@@ -19,8 +40,7 @@ void	init(t_win *win, int *x, int *y)
 	win->mlx = mlx_init();
 	win->win = mlx_new_window(win->mlx, win->win_w, win->win_h, "SOOOOO FUCKING LOOOOOONG !");
 	win->player = ft_calloc(1, sizeof(t_player));
-	win->player->p_x = 0;
-	win->player->p_y = 0;
+	get_player_pos(win);
 	win->player->score = 0;
 	win->player->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/player.xpm", x, y);
 	// win->bg = mlx_xpm_file_to_image(win->mlx, "xpm/bg.xpm", x, y);
@@ -44,6 +64,8 @@ int	main(int ac, char **av)
 		get_map(av[1], &win);
 		init(&win, &x, &y);
 		render_map(&win);
+		mlx_key_hook(win.win, key_on_pressed, &win);
+		mlx_loop(win.mlx);
 	}
 	else
 	{

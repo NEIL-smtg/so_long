@@ -61,5 +61,4 @@ void	render_map(t_win *win)
 		}
 		y += 64;
 	}
-	mlx_loop(win->mlx);
 }

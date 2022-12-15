@@ -75,4 +75,15 @@ void	good_map_structure(t_map *map);
 //render map
 void	render_map(t_win *win);
 
+//movement
+void	move_up(t_win *win);
+void	move_down(t_win *win);
+void	move_left(t_win *win);
+void	move_right(t_win *win);
+int		key_on_pressed(int keycode, t_win *win);
+
+
+//destroy all malloced thingy, destroy images and display
+void	destroy_everything(t_win *win);
+
 #endif

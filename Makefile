@@ -17,7 +17,8 @@ RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror -Imlx
 # MLXFLAGS	=	-L /usr/local/lib/libmlx.a
 MLXFLAGS	=	-L minilibx/minilibx-linux/libmlx_Linux.a
-SRCS_FILES	=	main parse_map good_map good_map_structure render_map
+SRCS_FILES	=	main parse_map good_map good_map_structure render_map destroy_everything \
+				movement
 SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 OBJS		= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))
 SRCS_DIR	=	srcs/
