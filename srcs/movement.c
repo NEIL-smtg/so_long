@@ -42,6 +42,7 @@ void	move_up(t_win *win)
 	{
 		win->map->mapping[y][x] = '0';
 		win->map->mapping[y - 1][x] = 'P';
+		get_player_pos(win);
 		mlx_clear_window(win->mlx, win->win);
 		render_map(win);
 		ft_printf("up\n");
@@ -59,6 +60,7 @@ void	move_down(t_win *win)
 	{
 		win->map->mapping[y][x] = '0';
 		win->map->mapping[y + 1][x] = 'P';
+		get_player_pos(win);
 		mlx_clear_window(win->mlx, win->win);
 		render_map(win);
 	}
@@ -75,6 +77,7 @@ void	move_left(t_win *win)
 	{
 		win->map->mapping[y][x] = '0';
 		win->map->mapping[y][x - 1] = 'P';
+		get_player_pos(win);
 		mlx_clear_window(win->mlx, win->win);
 		render_map(win);
 	}
@@ -91,6 +94,7 @@ void	move_right(t_win *win)
 	{
 		win->map->mapping[y][x] = '0';
 		win->map->mapping[y][x + 1] = 'P';
+		get_player_pos(win);
 		mlx_clear_window(win->mlx, win->win);
 		render_map(win);
 	}

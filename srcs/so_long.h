@@ -81,6 +81,7 @@ void	move_down(t_win *win);
 void	move_left(t_win *win);
 void	move_right(t_win *win);
 int		key_on_pressed(int keycode, t_win *win);
+void	get_player_pos(t_win *win);
 
 
 //destroy all malloced thingy, destroy images and display
