@@ -12,21 +12,41 @@
 
 #include "so_long.h"
 
+
+//linux
+// int	key_on_pressed(int keycode, t_win *win)
+// {
+// 	if (keycode == 65307)
+// 	{
+// 		destroy_everything(win);
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	if (keycode == 'w')
+// 		move_up(win);
+// 	if (keycode == 's')
+// 		move_down(win);
+// 	if (keycode == 'a')
+// 		move_left(win);
+// 	if (keycode == 'd')
+// 		move_right(win);
+// 	return (0);
+// }
+
+//mac
 int	key_on_pressed(int keycode, t_win *win)
 {
-	ft_printf("here\n");
-	if (keycode == 65307)
+	if (keycode == 53)
 	{
 		destroy_everything(win);
 		exit(EXIT_FAILURE);
 	}
-	if (keycode == 'w')
+	if (keycode == 13)
 		move_up(win);
-	if (keycode == 's')
+	if (keycode == 1)
 		move_down(win);
-	if (keycode == 'a')
+	if (keycode == 0)
 		move_left(win);
-	if (keycode == 'd')
+	if (keycode == 2)
 		move_right(win);
 	return (0);
 }
@@ -45,7 +65,6 @@ void	move_up(t_win *win)
 		get_player_pos(win);
 		mlx_clear_window(win->mlx, win->win);
 		render_map(win);
-		ft_printf("up\n");
 	}
 }
 

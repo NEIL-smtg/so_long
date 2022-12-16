@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG
-# define SO_LONG
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
 # include "../Libft/libft.h"
 # include "../Libft/get_next_line/get_next_line_bonus.h"
@@ -24,13 +24,13 @@ typedef struct s_player
 	int		p_y;
 	int		score;
 	void	*p_img;
-} t_player;
+}	t_player;
 
-typedef struct	s_exit_pos
+typedef struct s_exit_pos
 {
 	int	x;
 	int	y;
-} t_exit_pos;
+}	t_exit_pos;
 
 typedef struct s_map
 {
@@ -47,7 +47,7 @@ typedef struct s_map
 	void		*w_img;
 	void		*ex_img;
 	t_exit_pos	ex_pos;
-} t_map;
+}	t_map;
 
 typedef struct s_win
 {
@@ -58,7 +58,7 @@ typedef struct s_win
 	void		*bg;
 	t_map		*map;
 	t_player	*player;
-} t_win;
+}	t_win;
 
 //map
 void	ft_check_map_path(char *path);

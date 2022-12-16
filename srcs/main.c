@@ -16,7 +16,7 @@ void	get_player_pos(t_win *win)
 {
 	int	i;
 	int	j;
-	
+
 	i = -1;
 	while (win->map->mapping[++i])
 	{
