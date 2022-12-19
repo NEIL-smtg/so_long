@@ -18,6 +18,11 @@
 # include <fcntl.h>
 # include <mlx.h>
 
+# define LEFT 1
+# define RIGHT 2
+# define UP 3
+# define DOWN 4
+
 typedef struct s_player
 {
 	int		p_x;
@@ -25,12 +30,6 @@ typedef struct s_player
 	int		score;
 	void	*p_img;
 }	t_player;
-
-typedef struct s_exit_pos
-{
-	int	x;
-	int	y;
-}	t_exit_pos;
 
 typedef struct s_map
 {
@@ -46,7 +45,6 @@ typedef struct s_map
 	void		*empty_img;
 	void		*w_img;
 	void		*ex_img;
-	t_exit_pos	ex_pos;
 }	t_map;
 
 typedef struct s_win
@@ -55,7 +53,6 @@ typedef struct s_win
 	void		*win;
 	int			win_h;
 	int			win_w;
-	void		*bg;
 	t_map		*map;
 	t_player	*player;
 }	t_win;
@@ -73,6 +70,7 @@ void	free_map_exit(t_map *map);
 void	good_map_structure(t_map *map);
 
 //render map
+void	update_pos_and_render(t_win *win, int type);
 void	render_map(t_win *win);
 
 //movement
@@ -83,6 +81,9 @@ void	move_right(t_win *win);
 int		key_on_pressed(int keycode, t_win *win);
 void	get_player_pos(t_win *win);
 
+//handle score and exit
+void	handle_score(t_win *win);
+int		game_over(t_win *win);
 
 //destroy all malloced thingy, destroy images and display
 void	destroy_everything(t_win *win);

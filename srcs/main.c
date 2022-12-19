@@ -38,16 +38,15 @@ void	init(t_win *win, int *x, int *y)
 	win->win_h = win->map->h * 64;
 	win->win_w = win->map->w * 64;
 	win->mlx = mlx_init();
-	win->win = mlx_new_window(win->mlx, win->win_w, win->win_h, "SOOOOO FUCKING LOOOOOONG !");
+	win->win = mlx_new_window(win->mlx, win->win_w, win->win_h, "SOOOOO FUCKING LOOOOOONG !!!");
 	win->player = ft_calloc(1, sizeof(t_player));
 	get_player_pos(win);
 	win->player->score = 0;
-	win->player->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/player.xpm", x, y);
-	// win->bg = mlx_xpm_file_to_image(win->mlx, "xpm/bg.xpm", x, y);
-	// win->map->empty_img = mlx_xpm_file_to_image(win->mlx, "xpm/zero.xpm", x, y);
-	// win->map->w_img = mlx_xpm_file_to_image(win->mlx, "xpm/wall.xpm", x, y);
+	win->player->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/pr.xpm", x, y);
+	win->map->empty_img = mlx_xpm_file_to_image(win->mlx, "xpm/floor2.xpm", x, y);
+	win->map->w_img = mlx_xpm_file_to_image(win->mlx, "xpm/wall.xpm", x, y);
 	win->map->c_img = mlx_xpm_file_to_image(win->mlx, "xpm/coin.xpm", x, y);
-	// win->map->ex_img = mlx_xpm_file_to_image(win->mlx, "xpm/exit.xpm", x, y);
+	win->map->ex_img = mlx_xpm_file_to_image(win->mlx, "xpm/door1.xpm", x, y);
 }
 
 int	main(int ac, char **av)

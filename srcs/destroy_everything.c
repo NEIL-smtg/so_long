@@ -22,10 +22,10 @@ void	destroy_everything(t_win *win)
 		free(win->map->mapping[i]);
 	free(win->map->mapping);
 	mlx_destroy_image(win->mlx, win->player->p_img);
-	// mlx_destroy_image(win->mlx, win->bg);
-	// mlx_destroy_image(win->mlx, win->map->empty_img);
-	// mlx_destroy_image(win->mlx, win->map->w_img);
+	mlx_destroy_image(win->mlx, win->map->empty_img);
+	mlx_destroy_image(win->mlx, win->map->w_img);
 	mlx_destroy_image(win->mlx, win->map->c_img);
-	// mlx_destroy_image(win->mlx, win->map->ex_img);
-	free(win->player);	
+	mlx_destroy_image(win->mlx, win->map->ex_img);
+	free(win->player);
+	free(win->map);
 }

@@ -18,13 +18,13 @@ CFLAGS		=	-Wall -Wextra -Werror -Imlx
 # MLXFLAGS	=	-L /usr/local/lib/libmlx.a
 MLXFLAGS	=	-L minilibx/minilibx-linux/libmlx_Linux.a
 SRCS_FILES	=	main parse_map good_map good_map_structure render_map destroy_everything \
-				movement
+				movement about_score_and_exit
 SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 OBJS		= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))
 SRCS_DIR	=	srcs/
 LIBFT_DIR	=	libft
 OBJS_DIR	=	objs/
-FSANITIZE	= -fsanitize=address -g
+FSANITIZE	=	-fsanitize=address -g
 
 all:			
 				mkdir -p $(OBJS_DIR)
