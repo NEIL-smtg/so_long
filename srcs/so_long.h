@@ -25,8 +25,8 @@
 
 typedef struct s_player
 {
-	int		p_x;
-	int		p_y;
+	int		p_i;
+	int		p_j;
 	int		score;
 	void	*p_img;
 }	t_player;
@@ -60,6 +60,7 @@ typedef struct s_map
 	void		*empty_img;
 	void		*w_img;
 	void		*ex_img;
+	int			path_c;
 }	t_map;
 
 typedef struct s_win
@@ -84,6 +85,7 @@ void	check_start_pos(t_map *map);
 void	check_invalid_ch(t_map *map);
 void	free_map_exit(t_map *map);
 void	good_map_structure(t_map *map);
+void	is_there_a_path(t_win *win);
 
 //render map
 void	update_pos_and_render(t_win *win, int type);

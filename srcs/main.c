@@ -25,8 +25,8 @@ void	get_player_pos(t_win *win)
 		{
 			if (win->map->mapping[i][j] == 'P')
 			{
-				win->player->p_x = j;
-				win->player->p_y = i;
+				win->player->p_j = j;
+				win->player->p_i = i;
 				return ;
 			}
 		}

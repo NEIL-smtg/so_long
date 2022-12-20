@@ -16,8 +16,8 @@ CC			=	gcc
 RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror -Imlx
 # MLXFLAGS	=	-L /usr/local/lib/libmlx.a
-# MLXFLAGS	=	-L minilibx/minilibx-linux/libmlx_Linux.a
-MLXFLAGS	=	-L minilibx/minilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit -lz
+MLXFLAGS	=	-L minilibx/minilibx-linux/libmlx_Linux.a
+# MLXFLAGS	=	-L minilibx/minilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit -lz
 SRCS_FILES	=	main parse_map good_map good_map_structure render_map destroy_everything \
 				movement about_score_and_exit about_enemy
 SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
@@ -39,11 +39,11 @@ bonus:
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 				$(CC) -c $< -o $@
 
-# $(NAME):		$(OBJS)
-# 				$(CC) $(FSANITIZE) $(OBJS) $(LIBFT_DIR)/$(LIBFT) $(MLXFLAGS) -lmlx -lXext -lX11 -o $(NAME)
-
 $(NAME):		$(OBJS)
-				$(CC) $(FSANITIZE) $(OBJS) $(LIBFT_DIR)/$(LIBFT) $(MLXFLAGS) -o $(NAME)
+				$(CC) $(FSANITIZE) $(OBJS) $(LIBFT_DIR)/$(LIBFT) $(MLXFLAGS) -lmlx -lXext -lX11 -o $(NAME)
+
+# $(NAME):		$(OBJS)
+# 				$(CC) $(FSANITIZE) $(OBJS) $(LIBFT_DIR)/$(LIBFT) $(MLXFLAGS) -o $(NAME)
 
 libft:
 				make -C $(LIBFT_DIR)

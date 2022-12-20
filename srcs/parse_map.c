@@ -78,4 +78,5 @@ void	get_map(char *path, t_win *win)
 	free(whole);
 	set_map_vars(win->map);
 	valid_map(win->map);
+	is_there_a_path(win);
 }
