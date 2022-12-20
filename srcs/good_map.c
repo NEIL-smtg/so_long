@@ -33,7 +33,7 @@ void	check_len(t_map *map)
 	{
 		if (ft_strlen(map->mapping[i]) != map->w)
 		{
-			ft_printf("Invalid map! (length)\n");
+			ft_printf("Error !!!\nInvalid map! (length)\n");
 			free_map_exit(map);
 		}
 	}
@@ -60,7 +60,7 @@ void	check_collectible_exit(t_map *map)
 	}
 	if (map->c < 1 || map->e < 1)
 	{
-		ft_printf("Invalid map! (Collectible < 0)\n");
+		ft_printf("Error !!!\nInvalid map! (Collectible < 0)\n");
 		free_map_exit(map);
 	}
 }
@@ -81,7 +81,7 @@ void	check_start_pos(t_map *map)
 	}
 	if (map->p != 1)
 	{
-		ft_printf("Invalid map! (pos < 1 || pos > 1)\n");
+		ft_printf("Error !!\nInvalid map! (pos < 1 || pos > 1)\n");
 		free_map_exit(map);
 	}
 }
@@ -103,7 +103,7 @@ void	check_invalid_ch(t_map *map)
 			ch = map->mapping[i][j];
 			if (ch != '0' && ch != '1' && ch != 'C' && ch != 'E' && ch != 'P')
 			{
-				ft_printf("Wrong map input \"%c\"\n", ch);
+				ft_printf("Error !!!\nWrong map input \"%c\"\n", ch);
 				free_map_exit(map);
 			}
 			if (ch == '0')

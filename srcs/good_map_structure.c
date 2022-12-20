@@ -22,6 +22,7 @@ void	good_map_structure(t_map *map)
 	{
 		if (map->mapping[0][i] != '1' || map->mapping[map->h - 1][i] != '1')
 		{
+			ft_printf("ERROR !!!\n");
 			ft_printf("Wrong map structure! (WALL) :: column : %d\n", i);
 			free_map_exit(map);
 		}
@@ -31,9 +32,8 @@ void	good_map_structure(t_map *map)
 	{
 		if (map->mapping[i][0] != '1' || map->mapping[i][map->w - 1] != '1')
 		{
-			ft_printf("Wrong map structure! (WALL) :: Line : %d\n", i);
+			ft_printf("ERROR !!!\nWrong map structure! (WALL) :: Line : %d\n", i);
 			free_map_exit(map);
 		}
 	}
-	ft_printf("Good Map!\n");
 }

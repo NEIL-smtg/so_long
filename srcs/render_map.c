@@ -19,11 +19,20 @@ void	put_img(char c, t_win *win, int x, int y)
 	if (c == '0')
 		mlx_put_image_to_window(win->mlx, win->win, win->map->empty_img, x, y);
 	if (c == 'C')
+	{
+		mlx_put_image_to_window(win->mlx, win->win, win->map->empty_img, x, y);
 		mlx_put_image_to_window(win->mlx, win->win, win->map->c_img, x, y);
+	}
 	if (c == 'E')
+	{
+		mlx_put_image_to_window(win->mlx, win->win, win->map->empty_img, x, y);
 		mlx_put_image_to_window(win->mlx, win->win, win->map->ex_img, x, y);
+	}
 	if (c == 'P')
+	{
+		mlx_put_image_to_window(win->mlx, win->win, win->map->empty_img, x, y);
 		mlx_put_image_to_window(win->mlx, win->win, win->player->p_img, x, y);
+	}
 }
 
 void	put_score(t_win *win)
@@ -31,7 +40,7 @@ void	put_score(t_win *win)
 	char	*sc;
 
 	sc = ft_itoa(win->player->score);
-	mlx_string_put(win->mlx, win->win, 20, 20, 0xFFFFFF, sc);
+	mlx_string_put(win->mlx, win->win, 10, 10, 0xFFFFFF, sc);
 	free(sc);
 }
 
@@ -56,6 +65,8 @@ void	render_map(t_win *win)
 		}
 		y += 64;
 	}
+	// if (win->enemy)
+	// 	render_enemy(win);
 }
 
 void	update_pos_and_render(t_win *win, int type)

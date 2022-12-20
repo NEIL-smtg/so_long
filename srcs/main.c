@@ -47,6 +47,8 @@ void	init(t_win *win, int *x, int *y)
 	win->map->w_img = mlx_xpm_file_to_image(win->mlx, "xpm/wall.xpm", x, y);
 	win->map->c_img = mlx_xpm_file_to_image(win->mlx, "xpm/coin.xpm", x, y);
 	win->map->ex_img = mlx_xpm_file_to_image(win->mlx, "xpm/door1.xpm", x, y);
+	// win->enemy = ft_calloc(1, sizeof(t_ey_pos));
+	// put_enemy(win);
 }
 
 int	main(int ac, char **av)
@@ -63,7 +65,8 @@ int	main(int ac, char **av)
 		get_map(av[1], &win);
 		init(&win, &x, &y);
 		render_map(&win);
-		mlx_key_hook(win.win, key_on_pressed, &win);
+		mlx_hook(win.win, 2, (1L << 0), key_on_pressed, &win);
+		// mlx_hook(win.win, 2, (1L << 4), key_on_pressed, &win);
 		mlx_loop(win.mlx);
 	}
 	else

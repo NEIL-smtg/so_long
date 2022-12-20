@@ -31,6 +31,21 @@ typedef struct s_player
 	void	*p_img;
 }	t_player;
 
+typedef struct s_enemy_pos
+{
+	int		x;
+	int		y;
+	void	*next;
+}	t_ey_pos;
+
+typedef struct s_enemy
+{
+	int			x;
+	int			y;
+	void		*img;
+	t_ey_pos	*ey_pos;
+}	t_enemy;
+
 typedef struct s_map
 {
 	char		**mapping;
@@ -55,6 +70,7 @@ typedef struct s_win
 	int			win_w;
 	t_map		*map;
 	t_player	*player;
+	t_enemy		*enemy;
 }	t_win;
 
 //map
@@ -72,6 +88,8 @@ void	good_map_structure(t_map *map);
 //render map
 void	update_pos_and_render(t_win *win, int type);
 void	render_map(t_win *win);
+void	put_enemy(t_win *win);
+void	render_enemy(t_win *win);
 
 //movement
 void	move_up(t_win *win);

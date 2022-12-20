@@ -12,8 +12,6 @@
 
 #include "so_long.h"
 
-#include "so_long.h"
-
 void	ft_check_map_path(char *path)
 {
 	int	map_fd;
@@ -44,13 +42,14 @@ void	valid_map(t_map *map)
 	check_collectible_exit(map);
 	check_start_pos(map);
 	check_invalid_ch(map);
+	good_map_structure(map);
 }
 
 void	free_liness_exit(char *line1, char *line2)
 {
 	free(line1);
 	free(line2);
-	ft_printf("Empty line !\n");
+	ft_printf("Error !!!\nEmpty line !\n");
 	exit(EXIT_FAILURE);
 }
 
