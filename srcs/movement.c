@@ -55,8 +55,8 @@ void	move_up(t_win *win)
 	int	x;
 	int	y;
 
-	x = win->player->p_x;
-	y = win->player->p_y;
+	x = win->player->p_j;
+	y = win->player->p_i;
 	if ((y - 1) > 0 && win->map->mapping[y - 1][x] != '1')
 	{
 		if (win->map->mapping[y - 1][x] == 'C')
@@ -74,8 +74,8 @@ void	move_down(t_win *win)
 	int	x;
 	int	y;
 
-	x = win->player->p_x;
-	y = win->player->p_y;
+	x = win->player->p_j;
+	y = win->player->p_i;
 	if ((y + 1) < win->map->h && win->map->mapping[y + 1][x] != '1')
 	{
 		if (win->map->mapping[y + 1][x] == 'C')
@@ -93,8 +93,8 @@ void	move_left(t_win *win)
 	int	x;
 	int	y;
 
-	x = win->player->p_x;
-	y = win->player->p_y;
+	x = win->player->p_j;
+	y = win->player->p_i;
 	if ((x - 1) > 0 && win->map->mapping[y][x - 1] != '1')
 	{
 		if (win->map->mapping[y][x - 1] == 'C')
@@ -112,8 +112,8 @@ void	move_right(t_win *win)
 	int	x;
 	int	y;
 
-	x = win->player->p_x;
-	y = win->player->p_y;
+	x = win->player->p_j;
+	y = win->player->p_i;
 	if ((x + 1) < win->map->w && win->map->mapping[y][x + 1] != '1')
 	{
 		if (win->map->mapping[y][x + 1] == 'C')

@@ -12,65 +12,82 @@
 
 #include "so_long.h"
 
-void	dfs_player(int i, int j, t_map *map, int *a)
+void	free_vis(t_vis *v, int h)
 {
-	if (i < 0 || i > (map->h - 1) || j < 0 || j > (map->w - 1) || *a > 0)
-		return ;
-	if (map->mapping[i][j] == '1')
-		return ;
-	if (map->mapping[i][j] == 'E')
-	{
-		++(*a);
-		return ;
-	}
-	dfs_player(i - 1, j, map, a);
-	dfs_player(i + 1, j, map, a);
-	dfs_player(i, j - 1, map, a);
-	dfs_player(i, j + 1, map, a);
+	int	i;
+
+	i = -1;
+	while (++i < h)
+		free(v->vis[i]);
+	free(v->vis);
+	free(v);
 }
 
 void	dfs_c(int i, int j, t_map *map, int *a)
 {
-	if (i < 0 || i > (map->h - 1) || j < 0 || j > (map->w - 1))
+	if (i < 1 || i > (map->h - 2) || j < 1 || j > (map->w - 2))
 		return ;
-	if (map->mapping[i][j] == '1')
+	if (map->v->vis[i][j])
+		return ;
+	if (map->mapping[i][j] == '1' || map->mapping[i][j] == 'E')
 		return ;
 	if (map->mapping[i][j] == 'P')
 	{
 		++(*a);
 		return ;
 	}
-	if (*a == map->c)
-		return ;
-	dfs_c(i + 1, j, map, a);
+	map->v->vis[i][j] = 1;
 	dfs_c(i - 1, j, map, a);
+	dfs_c(i + 1, j, map, a);
 	dfs_c(i, j - 1, map, a);
 	dfs_c(i, j + 1, map, a);
 }
 
-void	is_there_a_path(t_win *win)
+void	clear_vis(t_vis *v, int h, int w)
 {
 	int	i;
 	int	j;
-	int	a;
-	int	a2;
 
 	i = -1;
-	a = 0;
-	a2 = 0;
-	while (win->map->mapping[++i])
+	while (++i < h)
 	{
 		j = -1;
-		while (win->map->mapping[i][++j])
+		while (++j < w)
+			v->vis[i][j] = 0;
+	}
+}
+
+void	is_there_a_path(t_win *win)
+{
+	int		i;
+	int		j;
+	int		a;
+
+	a = 0;
+	i = -1;
+	win->map->v = ft_calloc(1, sizeof(t_vis));
+	win->map->v->vis = ft_calloc(win->map->h, sizeof(int *));
+	while (++i < win->map->h)
+		win->map->v->vis[i] = ft_calloc(win->map->w, sizeof(int));
+	i = -1;
+	while (++i < win->map->h)
+	{
+		j = -1;
+		while (++j < win->map->w)
 		{
-			if (win->map->mapping[i][j] == 'P')
-				dfs_player(i, j, win->map, &a);
 			if (win->map->mapping[i][j] == 'C')
-				dfs_c(i, j, win->map, &a2);
+			{
+				clear_vis(win->map->v, win->map->h, win->map->w);
+				dfs_c(i, j, win->map, &a);
+			}
 		}
 	}
-	if (a2 != win->map->c || a < 1)
-		free_map_exit(win->map);
+	ft_printf("%d %d\n", a, win->map->c);
+	free_vis(win->map->v, win->map->h);
+	if (a >= win->map->c)
+		return ;
+	ft_printf("Error !!\nThere is no path to win !!\n");
+	free_map_exit(win->map);
 }
 
 //check if map is surrounded by walls

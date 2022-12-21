@@ -23,6 +23,13 @@
 # define UP 3
 # define DOWN 4
 
+
+//for visited path
+typedef struct s_vis
+{
+	int		**vis;
+}	t_vis;
+
 typedef struct s_player
 {
 	int		p_i;
@@ -60,7 +67,7 @@ typedef struct s_map
 	void		*empty_img;
 	void		*w_img;
 	void		*ex_img;
-	int			path_c;
+	t_vis		*v;
 }	t_map;
 
 typedef struct s_win
