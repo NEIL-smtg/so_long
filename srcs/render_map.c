@@ -65,8 +65,6 @@ void	render_map(t_win *win)
 		}
 		y += 64;
 	}
-	// if (win->enemy)
-	// 	render_enemy(win);
 }
 
 void	update_pos_and_render(t_win *win, int type)
@@ -80,8 +78,10 @@ void	update_pos_and_render(t_win *win, int type)
 	mlx_clear_window(win->mlx, win->win);
 	mlx_destroy_image(win->mlx, win->player->p_img);
 	if (type == LEFT)
-		win->player->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/pl.xpm", &x, &y);
+		win->player->p_img = mlx_xpm_file_to_image(win->mlx,
+				"xpm/pl.xpm", &x, &y);
 	else
-		win->player->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/pr.xpm", &x, &y);
+		win->player->p_img = mlx_xpm_file_to_image(win->mlx,
+				"xpm/pr.xpm", &x, &y);
 	render_map(win);
 }

@@ -19,7 +19,8 @@ CFLAGS		=	-Wall -Wextra -Werror -Imlx
 MLXFLAGS	=	-L minilibx/minilibx-linux/libmlx_Linux.a
 # MLXFLAGS	=	-L minilibx/minilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit -lz
 SRCS_FILES	=	main parse_map good_map good_map_structure render_map destroy_everything \
-				movement about_score_and_exit about_enemy
+				movement about_score_and_exit about_enemy map_dfs
+INCLS		=	srcs/so_long.h
 SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 OBJS		= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))
 SRCS_DIR	=	srcs/
@@ -61,4 +62,4 @@ re:				fclean all
 .PHONY:			all bonus libft clean fclean re
 
 norm:
-	norminette -R CheckForbiddenSourceHeader $(SRCS)
+	norminette -R CheckForbiddenSourceHeader $(SRCS) $(INCLS)

@@ -23,11 +23,11 @@
 # define UP 3
 # define DOWN 4
 
-
 //for visited path
 typedef struct s_vis
 {
 	int		**vis;
+	int		c;
 }	t_vis;
 
 typedef struct s_player
@@ -92,7 +92,13 @@ void	check_start_pos(t_map *map);
 void	check_invalid_ch(t_map *map);
 void	free_map_exit(t_map *map);
 void	good_map_structure(t_map *map);
+
+//make sure there is always a path to win
 void	is_there_a_path(t_win *win);
+void	dfs_c(int i, int j, t_map *map, int *a);
+void	dfs_e(int i, int j, t_map *map, int *a2);
+void	clear_vis(t_vis *v, int h, int w);
+void	free_vis(t_vis *v, int h);
 
 //render map
 void	update_pos_and_render(t_win *win, int type);

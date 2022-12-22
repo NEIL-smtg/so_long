@@ -38,17 +38,22 @@ void	init(t_win *win, int *x, int *y)
 	win->win_h = win->map->h * 64;
 	win->win_w = win->map->w * 64;
 	win->mlx = mlx_init();
-	win->win = mlx_new_window(win->mlx, win->win_w, win->win_h, "SOOOOO FUCKING LOOOOOONG !!!");
+	win->win = mlx_new_window(win->mlx, win->win_w, win->win_h,
+			"SOOOOO FUCKING LOOOOOONG !!!");
 	win->player = ft_calloc(1, sizeof(t_player));
 	get_player_pos(win);
 	win->player->score = 0;
-	win->player->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/pr.xpm", x, y);
-	win->map->empty_img = mlx_xpm_file_to_image(win->mlx, "xpm/floor2.xpm", x, y);
-	win->map->w_img = mlx_xpm_file_to_image(win->mlx, "xpm/wall.xpm", x, y);
-	win->map->c_img = mlx_xpm_file_to_image(win->mlx, "xpm/coin.xpm", x, y);
-	win->map->ex_img = mlx_xpm_file_to_image(win->mlx, "xpm/door1.xpm", x, y);
-	// win->enemy = ft_calloc(1, sizeof(t_ey_pos));
-	// put_enemy(win);
+	win->player->p_img = mlx_xpm_file_to_image(win->mlx,
+			"xpm/pr.xpm", x, y);
+	win->map->empty_img = mlx_xpm_file_to_image(win->mlx,
+			"xpm/floor2.xpm", x, y);
+	win->map->w_img = mlx_xpm_file_to_image(win->mlx,
+			"xpm/wall.xpm", x, y);
+	win->map->c_img = mlx_xpm_file_to_image(win->mlx,
+			"xpm/coin.xpm", x, y);
+	win->map->ex_img = mlx_xpm_file_to_image(win->mlx,
+			"xpm/door1.xpm", x, y);
+	win->enemy = ft_calloc(1, sizeof(t_enemy));
 }
 
 int	main(int ac, char **av)
@@ -66,7 +71,6 @@ int	main(int ac, char **av)
 		init(&win, &x, &y);
 		render_map(&win);
 		mlx_hook(win.win, 2, (1L << 0), key_on_pressed, &win);
-		// mlx_hook(win.win, 2, (1L << 4), key_on_pressed, &win);
 		mlx_loop(win.mlx);
 	}
 	else
