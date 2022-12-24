@@ -35,6 +35,8 @@ void	get_player_pos(t_win *win)
 
 void	init(t_win *win, int *x, int *y)
 {
+	int	i;
+
 	win->win_h = win->map->h * 64;
 	win->win_w = win->map->w * 64;
 	win->mlx = mlx_init();
@@ -43,6 +45,7 @@ void	init(t_win *win, int *x, int *y)
 	win->player = ft_calloc(1, sizeof(t_player));
 	get_player_pos(win);
 	win->player->score = 0;
+	win->player->lives = 3;
 	win->player->p_img = mlx_xpm_file_to_image(win->mlx,
 			"xpm/pr.xpm", x, y);
 	win->map->empty_img = mlx_xpm_file_to_image(win->mlx,
@@ -53,7 +56,7 @@ void	init(t_win *win, int *x, int *y)
 			"xpm/coin.xpm", x, y);
 	win->map->ex_img = mlx_xpm_file_to_image(win->mlx,
 			"xpm/door1.xpm", x, y);
-	win->enemy = ft_calloc(1, sizeof(t_enemy));
+	init_enemy(win);
 }
 
 int	main(int ac, char **av)
@@ -71,6 +74,7 @@ int	main(int ac, char **av)
 		init(&win, &x, &y);
 		render_map(&win);
 		mlx_hook(win.win, 2, (1L << 0), key_on_pressed, &win);
+		mlx_loop_hook(win.mlx, enemy_patrol, &win);
 		mlx_loop(win.mlx);
 	}
 	else

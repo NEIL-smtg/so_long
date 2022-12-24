@@ -35,22 +35,16 @@ typedef struct s_player
 	int		p_i;
 	int		p_j;
 	int		score;
+	int		lives;
 	void	*p_img;
 }	t_player;
 
-typedef struct s_enemy_pos
-{
-	int		x;
-	int		y;
-	void	*next;
-}	t_ey_pos;
-
 typedef struct s_enemy
 {
-	int			x;
-	int			y;
-	void		*img;
-	t_ey_pos	*ey_pos;
+	int				i;
+	int				j;
+	void			*img;
+	struct s_enemy	*next;
 }	t_enemy;
 
 typedef struct s_map
@@ -100,11 +94,14 @@ void	dfs_e(int i, int j, t_map *map, int *a2);
 void	clear_vis(t_vis *v, int h, int w);
 void	free_vis(t_vis *v, int h);
 
+//enemy
+void	init_enemy(t_win *win);
+void	render_enemy(t_win *win);
+
 //render map
 void	update_pos_and_render(t_win *win, int type);
 void	render_map(t_win *win);
-void	put_enemy(t_win *win);
-void	render_enemy(t_win *win);
+int		enemy_patrol(t_win *win);
 
 //movement
 void	move_up(t_win *win);

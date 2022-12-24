@@ -65,6 +65,7 @@ void	render_map(t_win *win)
 		}
 		y += 64;
 	}
+	render_enemy(win);
 }
 
 void	update_pos_and_render(t_win *win, int type)

@@ -12,13 +12,18 @@
 
 #include "so_long.h"
 
-void	destroy_enemy(t_ey_pos *ey)
+void	destroy_enemy(t_win *win)
 {
-	t_ey_pos	*tmp;
+	t_enemy	*tmp;
+	t_enemy	*ey;
 
+	if (!win->enemy)
+		return ;
+	ey = win->enemy;
 	while (ey)
 	{
 		tmp = ey->next;
+		mlx_destroy_image(win->mlx, ey->img);
 		free(ey);
 		ey = tmp;
 	}
@@ -39,8 +44,7 @@ void	destroy_everything(t_win *win)
 	mlx_destroy_image(win->mlx, win->map->w_img);
 	mlx_destroy_image(win->mlx, win->map->c_img);
 	mlx_destroy_image(win->mlx, win->map->ex_img);
-	// destroy_enemy(win->enemy->ey_pos);
-	// free(win->enemy);
+	destroy_enemy(win);
 	free(win->player);
 	free(win->map);
 }
