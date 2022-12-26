@@ -24,8 +24,8 @@ void	handle_score(t_win *win, int i, int j)
 	{
 		x = 0;
 		y = 0;
-		mlx_destroy_image(win->mlx, win->map->ex_img);
-		win->map->ex_img = mlx_xpm_file_to_image(win->mlx,
+		mlx_destroy_image(win->mlx, win->img->ex_img);
+		win->img->ex_img = mlx_xpm_file_to_image(win->mlx,
 				"xpm/exit_open.xpm", &x, &y);
 	}
 }

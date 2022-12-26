@@ -47,15 +47,16 @@ void	init(t_win *win, int *x, int *y)
 	win->player->score = 0;
 	win->player->lives = 3;
 	win->player->steps = 0;
-	win->player->p_img = mlx_xpm_file_to_image(win->mlx,
+	win->img = ft_calloc(1, sizeof(t_img));
+	win->img->p_img = mlx_xpm_file_to_image(win->mlx,
 			"xpm/pr.xpm", x, y);
-	win->map->empty_img = mlx_xpm_file_to_image(win->mlx,
+	win->img->empty_img = mlx_xpm_file_to_image(win->mlx,
 			"xpm/floor2.xpm", x, y);
-	win->map->w_img = mlx_xpm_file_to_image(win->mlx,
+	win->img->w_img = mlx_xpm_file_to_image(win->mlx,
 			"xpm/wall.xpm", x, y);
-	win->map->c_img = mlx_xpm_file_to_image(win->mlx,
+	win->img->c_img = mlx_xpm_file_to_image(win->mlx,
 			"xpm/coin.xpm", x, y);
-	win->map->ex_img = mlx_xpm_file_to_image(win->mlx,
+	win->img->ex_img = mlx_xpm_file_to_image(win->mlx,
 			"xpm/door1.xpm", x, y);
 	init_enemy(win);
 }
@@ -75,7 +76,7 @@ int	main(int ac, char **av)
 		init(&win, &x, &y);
 		render_map(&win);
 		mlx_hook(win.win, 2, (1L << 0), key_on_pressed, &win);
-		// mlx_loop_hook(win.mlx, enemy_patrol, &win);
+		mlx_loop_hook(win.mlx, enemy_patrol, &win);
 		mlx_loop(win.mlx);
 	}
 	else

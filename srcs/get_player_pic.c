@@ -19,8 +19,8 @@ void	get_player_left_pic(t_win *win)
 
 	x = 0;
 	y = 0;
-	mlx_destroy_image(win->mlx, win->player->p_img);
-	win->player->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/pl.xpm", &x, &y);
+	mlx_destroy_image(win->mlx, win->img->p_img);
+	win->img->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/pl.xpm", &x, &y);
 }
 
 void	get_player_right_pic(t_win *win)
@@ -30,6 +30,6 @@ void	get_player_right_pic(t_win *win)
 
 	x = 0;
 	y = 0;
-	mlx_destroy_image(win->mlx, win->player->p_img);
-	win->player->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/pr.xpm", &x, &y);
+	mlx_destroy_image(win->mlx, win->img->p_img);
+	win->img->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/pr.xpm", &x, &y);
 }

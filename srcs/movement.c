@@ -70,7 +70,7 @@ void	move_up(t_win *win)
 	mlx_clear_window(win->mlx, win->win);
 	render_map(win);
 	mlx_put_image_to_window(win->mlx, win->win,
-		win->player->p_img, p->p_x, p->p_y);
+		win->img->p_img, p->p_x, p->p_y);
 }
 
 void	move_down(t_win *win)
@@ -93,7 +93,7 @@ void	move_down(t_win *win)
 	mlx_clear_window(win->mlx, win->win);
 	render_map(win);
 	mlx_put_image_to_window(win->mlx, win->win,
-		win->player->p_img, p->p_x, p->p_y);
+		win->img->p_img, p->p_x, p->p_y);
 }
 
 void	move_left(t_win *win)
@@ -117,7 +117,7 @@ void	move_left(t_win *win)
 	render_map(win);
 	get_player_left_pic(win);
 	mlx_put_image_to_window(win->mlx, win->win,
-		win->player->p_img, p->p_x, p->p_y);
+		win->img->p_img, p->p_x, p->p_y);
 }
 
 void	move_right(t_win *win)
@@ -130,10 +130,7 @@ void	move_right(t_win *win)
 	nx = (p->p_x + 64) / 64;
 	ny = p->p_y / 64;
 	if (movement_tracker(win, RIGHT, WALL))
-	{
-		ft_printf("hey\n");
 		return ;
-	}
 	if (movement_tracker(win, RIGHT, COIN))
 		handle_score(win, ny, nx);
 	if (movement_tracker(win, RIGHT, EX))
@@ -144,5 +141,5 @@ void	move_right(t_win *win)
 	render_map(win);
 	get_player_right_pic(win);
 	mlx_put_image_to_window(win->mlx, win->win,
-		win->player->p_img, p->p_x, p->p_y);
+		win->img->p_img, p->p_x, p->p_y);
 }

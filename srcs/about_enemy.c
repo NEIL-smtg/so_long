@@ -6,7 +6,7 @@
 /*   By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:31:47 by suchua            #+#    #+#             */
-/*   Updated: 2022/12/25 14:37:02 by suchua           ###   ########.fr       */
+/*   Updated: 2022/12/26 17:31:49 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,14 @@ void	init_enemy(t_win *win)
 void	render_enemy(t_win *win)
 {
 	t_enemy	*list;
+	int		x;
+	int		y;
 
 	if (!win->enemy)
 		return ;
 	list = win->enemy;
+	x = 0;
+	y = 0;
 	while (list)
 	{
 		mlx_put_image_to_window(win->mlx, win->win, list->img,

@@ -12,6 +12,17 @@
 
 #include "so_long.h"
 
+void	destroy_map(t_win *win)
+{
+	int	i;
+
+	i = -1;
+	while (win->map->mapping[++i])
+		free(win->map->mapping[i]);
+	free(win->map->mapping);
+	free(win->map);
+}
+
 void	destroy_enemy(t_win *win)
 {
 	t_enemy	*tmp;
@@ -30,21 +41,23 @@ void	destroy_enemy(t_win *win)
 	ey = NULL;
 }
 
+void	destroy_img(t_win *win)
+{
+	mlx_destroy_image(win->mlx, win->img->empty_img);
+	mlx_destroy_image(win->mlx, win->img->w_img);
+	mlx_destroy_image(win->mlx, win->img->c_img);
+	mlx_destroy_image(win->mlx, win->img->ex_img);
+	mlx_destroy_image(win->mlx, win->img->p_img);
+	free(win->img);
+}
+
 void	destroy_everything(t_win *win)
 {
 	int	i;
 
 	mlx_destroy_window(win->mlx, win->win);
-	i = -1;
-	while (win->map->mapping[++i])
-		free(win->map->mapping[i]);
-	free(win->map->mapping);
-	mlx_destroy_image(win->mlx, win->map->empty_img);
-	mlx_destroy_image(win->mlx, win->map->w_img);
-	mlx_destroy_image(win->mlx, win->map->c_img);
-	mlx_destroy_image(win->mlx, win->map->ex_img);
+	destroy_map(win);
+	destroy_img(win);
 	destroy_enemy(win);
-	mlx_destroy_image(win->mlx, win->player->p_img);
 	free(win->player);
-	free(win->map);
 }

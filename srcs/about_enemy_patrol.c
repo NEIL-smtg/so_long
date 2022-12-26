@@ -29,5 +29,6 @@ int	enemy_patrol(t_win *win)
 			--lst->j;
 		lst = lst->next;
 	}
+	render_enemy(win);
 	return (0);
 }

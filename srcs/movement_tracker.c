@@ -47,7 +47,6 @@ int	track_right(t_player *p, t_map *map, char c)
 	i = 0;
 	while (i < 4)
 	{
-		ft_printf("%d\n", i);
 		if (map->mapping[dy / 64][dx / 64] == c)
 			return (1);
 		++i;

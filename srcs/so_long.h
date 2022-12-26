@@ -41,7 +41,6 @@ typedef struct s_player
 	int		steps;
 	int		score;
 	int		lives;
-	void	*p_img;
 }	t_player;
 
 typedef struct s_enemy
@@ -62,12 +61,17 @@ typedef struct s_map
 	int			c;
 	int			e;
 	int			p;
-	void		*c_img;
-	void		*empty_img;
-	void		*w_img;
-	void		*ex_img;
 	t_vis		*v;
 }	t_map;
+
+typedef struct s_img
+{
+	void	*c_img;
+	void	*empty_img;
+	void	*w_img;
+	void	*ex_img;
+	void	*p_img;
+}	t_img;
 
 typedef struct s_win
 {
@@ -78,6 +82,7 @@ typedef struct s_win
 	t_map		*map;
 	t_player	*player;
 	t_enemy		*enemy;
+	t_img		*img;
 }	t_win;
 
 //map
