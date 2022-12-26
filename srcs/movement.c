@@ -52,76 +52,97 @@ int	key_on_pressed(int keycode, t_win *win)
 
 void	move_up(t_win *win)
 {
-	int	x;
-	int	y;
+	t_player	*p;
+	int			nx;
+	int			ny;
 
-	x = win->player->p_j;
-	y = win->player->p_i;
-	if ((y - 1) > 0 && win->map->mapping[y - 1][x] != '1')
-	{
-		if (win->map->mapping[y - 1][x] == 'C')
-			handle_score(win);
-		if (win->map->mapping[y - 1][x] == 'E' && !game_over(win))
-			return ;
-		win->map->mapping[y][x] = '0';
-		win->map->mapping[y - 1][x] = 'P';
-		update_pos_and_render(win, UP);
-	}
+	p = win->player;
+	nx = p->p_x / 64;
+	ny = (p->p_y - 16) / 64;
+	if (movement_tracker(win, UP, WALL))
+		return ;
+	if (movement_tracker(win, UP, COIN))
+		handle_score(win, ny, nx);
+	if (movement_tracker(win, UP, EX))
+		game_over(win);
+	p->p_y -= 16;
+	p->steps++;
+	mlx_clear_window(win->mlx, win->win);
+	render_map(win);
+	mlx_put_image_to_window(win->mlx, win->win,
+		win->player->p_img, p->p_x, p->p_y);
 }
 
 void	move_down(t_win *win)
 {
-	int	x;
-	int	y;
+	t_player	*p;
+	int			nx;
+	int			ny;
 
-	x = win->player->p_j;
-	y = win->player->p_i;
-	if ((y + 1) < win->map->h && win->map->mapping[y + 1][x] != '1')
-	{
-		if (win->map->mapping[y + 1][x] == 'C')
-			handle_score(win);
-		if (win->map->mapping[y + 1][x] == 'E' && !game_over(win))
-			return ;
-		win->map->mapping[y][x] = '0';
-		win->map->mapping[y + 1][x] = 'P';
-		update_pos_and_render(win, DOWN);
-	}
+	p = win->player;
+	nx = p->p_x / 64;
+	ny = (p->p_y + 64) / 64;
+	if (movement_tracker(win, DOWN, WALL))
+		return ;
+	if (movement_tracker(win, DOWN, COIN))
+		handle_score(win, ny, nx);
+	if (movement_tracker(win, DOWN, EX))
+		game_over(win);
+	p->p_y += 16;
+	p->steps++;
+	mlx_clear_window(win->mlx, win->win);
+	render_map(win);
+	mlx_put_image_to_window(win->mlx, win->win,
+		win->player->p_img, p->p_x, p->p_y);
 }
 
 void	move_left(t_win *win)
 {
-	int	x;
-	int	y;
+	t_player	*p;
+	int			nx;
+	int			ny;
 
-	x = win->player->p_j;
-	y = win->player->p_i;
-	if ((x - 1) > 0 && win->map->mapping[y][x - 1] != '1')
-	{
-		if (win->map->mapping[y][x - 1] == 'C')
-			handle_score(win);
-		if (win->map->mapping[y][x - 1] == 'E' && !game_over(win))
-			return ;
-		win->map->mapping[y][x] = '0';
-		win->map->mapping[y][x - 1] = 'P';
-		update_pos_and_render(win, LEFT);
-	}
+	p = win->player;
+	nx = (p->p_x - 16) / 64;
+	ny = p->p_y / 64;
+	if (movement_tracker(win, LEFT, WALL))
+		return ;
+	if (movement_tracker(win, LEFT, COIN))
+		handle_score(win, ny, nx);
+	if (movement_tracker(win, LEFT, EX))
+		game_over(win);
+	p->p_x -= 16;
+	p->steps++;
+	mlx_clear_window(win->mlx, win->win);
+	render_map(win);
+	get_player_left_pic(win);
+	mlx_put_image_to_window(win->mlx, win->win,
+		win->player->p_img, p->p_x, p->p_y);
 }
 
 void	move_right(t_win *win)
 {
-	int	x;
-	int	y;
+	t_player	*p;
+	int			nx;
+	int			ny;
 
-	x = win->player->p_j;
-	y = win->player->p_i;
-	if ((x + 1) < win->map->w && win->map->mapping[y][x + 1] != '1')
+	p = win->player;
+	nx = (p->p_x + 64) / 64;
+	ny = p->p_y / 64;
+	if (movement_tracker(win, RIGHT, WALL))
 	{
-		if (win->map->mapping[y][x + 1] == 'C')
-			handle_score(win);
-		if (win->map->mapping[y][x + 1] == 'E' && !game_over(win))
-			return ;
-		win->map->mapping[y][x] = '0';
-		win->map->mapping[y][x + 1] = 'P';
-		update_pos_and_render(win, RIGHT);
+		ft_printf("hey\n");
+		return ;
 	}
+	if (movement_tracker(win, RIGHT, COIN))
+		handle_score(win, ny, nx);
+	if (movement_tracker(win, RIGHT, EX))
+		game_over(win);
+	p->p_x += 16;
+	p->steps++;
+	mlx_clear_window(win->mlx, win->win);
+	render_map(win);
+	get_player_right_pic(win);
+	mlx_put_image_to_window(win->mlx, win->win,
+		win->player->p_img, p->p_x, p->p_y);
 }

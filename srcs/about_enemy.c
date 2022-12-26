@@ -6,7 +6,7 @@
 /*   By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:31:47 by suchua            #+#    #+#             */
-/*   Updated: 2022/12/24 17:20:18 by suchua           ###   ########.fr       */
+/*   Updated: 2022/12/25 14:37:02 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	render_enemy(t_win *win)
 	while (list)
 	{
 		mlx_put_image_to_window(win->mlx, win->win, list->img,
-				list->j * 64, list->i * 64);
+			list->j * 64, list->i * 64);
 		list = list->next;
 	}
 }

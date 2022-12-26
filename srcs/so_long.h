@@ -17,11 +17,15 @@
 # include "../Libft/get_next_line/get_next_line_bonus.h"
 # include <fcntl.h>
 # include <mlx.h>
-
+//player movement
 # define LEFT 1
 # define RIGHT 2
 # define UP 3
 # define DOWN 4
+//map feature
+# define WALL 1
+# define COIN 2
+# define EX 3
 
 //for visited path
 typedef struct s_vis
@@ -32,8 +36,9 @@ typedef struct s_vis
 
 typedef struct s_player
 {
-	int		p_i;
-	int		p_j;
+	int		p_x;
+	int		p_y;
+	int		steps;
 	int		score;
 	int		lives;
 	void	*p_img;
@@ -101,7 +106,10 @@ void	render_enemy(t_win *win);
 //render map
 void	update_pos_and_render(t_win *win, int type);
 void	render_map(t_win *win);
+void	put_img(char c, t_win *win, int x, int y);
 int		enemy_patrol(t_win *win);
+void	get_player_left_pic(t_win *win);
+void	get_player_right_pic(t_win *win);
 
 //movement
 void	move_up(t_win *win);
@@ -110,9 +118,10 @@ void	move_left(t_win *win);
 void	move_right(t_win *win);
 int		key_on_pressed(int keycode, t_win *win);
 void	get_player_pos(t_win *win);
+int		movement_tracker(t_win *win, int dir_type, int w_type);
 
 //handle score and exit
-void	handle_score(t_win *win);
+void	handle_score(t_win *win, int i, int j);
 int		game_over(t_win *win);
 
 //destroy all malloced thingy, destroy images and display

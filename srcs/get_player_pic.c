@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   about_score_and_exit.c                             :+:      :+:    :+:   */
+/*   get_player_pic.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/19 17:21:22 by suchua            #+#    #+#             */
-/*   Updated: 2022/12/19 17:21:22 by suchua           ###   ########.fr       */
+/*   Created: 2022/12/25 13:58:46 by suchua            #+#    #+#             */
+/*   Updated: 2022/12/25 13:58:46 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	handle_score(t_win *win, int i, int j)
+void	get_player_left_pic(t_win *win)
 {
 	int	x;
 	int	y;
 
-	win->player->score++;
-	win->map->c--;
-	win->map->mapping[i][j] = '0';
-	if (!win->map->c)
-	{
-		x = 0;
-		y = 0;
-		mlx_destroy_image(win->mlx, win->map->ex_img);
-		win->map->ex_img = mlx_xpm_file_to_image(win->mlx,
-				"xpm/exit_open.xpm", &x, &y);
-	}
+	x = 0;
+	y = 0;
+	mlx_destroy_image(win->mlx, win->player->p_img);
+	win->player->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/pl.xpm", &x, &y);
 }
 
-int	game_over(t_win *win)
+void	get_player_right_pic(t_win *win)
 {
-	if (win->map->c > 0)
-		return (0);
-	ft_printf("YOU WON THIS GAME !!!\n");
-	destroy_everything(win);
-	exit(EXIT_FAILURE);
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	mlx_destroy_image(win->mlx, win->player->p_img);
+	win->player->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/pr.xpm", &x, &y);
 }

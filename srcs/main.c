@@ -25,8 +25,8 @@ void	get_player_pos(t_win *win)
 		{
 			if (win->map->mapping[i][j] == 'P')
 			{
-				win->player->p_j = j;
-				win->player->p_i = i;
+				win->player->p_x = j * 64;
+				win->player->p_y = i * 64;
 				return ;
 			}
 		}
@@ -46,6 +46,7 @@ void	init(t_win *win, int *x, int *y)
 	get_player_pos(win);
 	win->player->score = 0;
 	win->player->lives = 3;
+	win->player->steps = 0;
 	win->player->p_img = mlx_xpm_file_to_image(win->mlx,
 			"xpm/pr.xpm", x, y);
 	win->map->empty_img = mlx_xpm_file_to_image(win->mlx,
@@ -74,7 +75,7 @@ int	main(int ac, char **av)
 		init(&win, &x, &y);
 		render_map(&win);
 		mlx_hook(win.win, 2, (1L << 0), key_on_pressed, &win);
-		mlx_loop_hook(win.mlx, enemy_patrol, &win);
+		// mlx_loop_hook(win.mlx, enemy_patrol, &win);
 		mlx_loop(win.mlx);
 	}
 	else

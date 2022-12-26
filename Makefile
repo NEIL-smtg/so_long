@@ -19,7 +19,8 @@ CFLAGS		=	-Wall -Wextra -Werror -Imlx
 MLXFLAGS	=	-L minilibx/minilibx-linux/libmlx_Linux.a
 # MLXFLAGS	=	-L minilibx/minilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit -lz
 SRCS_FILES	=	main parse_map good_map good_map_structure render_map destroy_everything \
-				movement about_score_and_exit map_dfs about_enemy about_enemy_patrol
+				movement about_score_and_exit map_dfs about_enemy about_enemy_patrol \
+				get_player_pic movement_tracker
 INCLS		=	srcs/so_long.h
 SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 OBJS		= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))
