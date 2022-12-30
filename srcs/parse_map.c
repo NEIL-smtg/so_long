@@ -26,7 +26,7 @@ void	ft_check_map_path(char *path)
 	close(map_fd);
 }
 
-void	set_map_vars(t_map *map)
+void	init_map(t_map *map)
 {
 	int	h;
 
@@ -34,11 +34,22 @@ void	set_map_vars(t_map *map)
 	while (map->mapping[++h])
 		map->h = h + 1;
 	map->w = ft_strlen(map->mapping[0]);
+	map->empty = 0;
+	map->wall = 0;
+	map->n = 0;
+	map->p = 0;
+	map->c = 0;
+	map->e = 0;
 }
 
 void	valid_map(t_map *map)
 {
 	check_len(map);
+	if (map->w == map->h)
+	{
+		ft_printf("Error !!\nMap has to be in rectangle shape !!\n");
+		free_map_exit(map);
+	}
 	check_collectible_exit(map);
 	check_start_pos(map);
 	check_invalid_ch(map);
@@ -76,7 +87,7 @@ void	get_map(char *path, t_win *win)
 	win->map = ft_calloc(1, sizeof(t_map));
 	win->map->mapping = ft_split(whole, '\n');
 	free(whole);
-	set_map_vars(win->map);
+	init_map(win->map);
 	valid_map(win->map);
 	is_there_a_path(win);
 }

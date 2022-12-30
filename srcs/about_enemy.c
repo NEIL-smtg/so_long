@@ -6,76 +6,61 @@
 /*   By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:31:47 by suchua            #+#    #+#             */
-/*   Updated: 2022/12/26 17:31:49 by suchua           ###   ########.fr       */
+/*   Updated: 2022/12/31 00:04:04 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	create_each_enemy(int i, int j, t_win *win)
+void	render_enemy(t_win *win)
 {
-	t_enemy	*list;
-	t_enemy	*new;
-	int		x;
-	int		y;
+	t_enemy	*lst;
 
-	list = win->enemy;
-	while (win->enemy && list && list->next)
-		list = list->next;
+	lst = win->enemy;
+	while (lst)
+	{
+		mlx_put_image_to_window(win->mlx, win->win, lst->img,
+			lst->j * 64, lst->i * 64);
+		lst = lst->next;
+	}
+}
+
+int	get_enemy_size(t_enemy *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		++i;
+	}
+	return (i);
+}
+
+t_enemy	*get_last_elem(t_enemy *lst)
+{
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+void	add_enemy_to_list(t_win *win, int i, int j)
+{
+	t_enemy	*new;
+	t_enemy	*last;
+
 	new = ft_calloc(1, sizeof(t_enemy));
 	new->i = i;
 	new->j = j;
-	new->img = mlx_xpm_file_to_image(win->mlx, "xpm/pacman.xpm", &x, &y);
 	new->next = NULL;
-	if (!list)
-		win->enemy = new;
-	else
-		list->next = new;
-}
-
-void	create_enemy_list(int i, int j, t_win *win)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	if (win->map->mapping[i - 1][j - 1] == '0')
-		create_each_enemy(i - 1, j - 1, win);
-	if (win->map->mapping[i - 1][j + 1] == '0')
-		create_each_enemy(i - 1, j + 1, win);
-	if (win->map->mapping[i + 1][j - 1] == '0')
-		create_each_enemy(i + 1, j - 1, win);
-	if (win->map->mapping[i + 1][j + 1] == '0')
-		create_each_enemy(i + 1, j + 1, win);
-}
-
-void	init_enemy(t_win *win)
-{
-	int	e_i;
-	int	e_j;
-
-	e_i = (win->map->h - 1) / 2;
-	e_j = (win->map->w - 1) / 2;
-	win->enemy = NULL;
-	create_enemy_list(e_i, e_j, win);
-}
-
-void	render_enemy(t_win *win)
-{
-	t_enemy	*list;
-	int		x;
-	int		y;
-
+	new->img = win->img->anim->demon_right;
+	new->direction = RIGHT;
 	if (!win->enemy)
-		return ;
-	list = win->enemy;
-	x = 0;
-	y = 0;
-	while (list)
 	{
-		mlx_put_image_to_window(win->mlx, win->win, list->img,
-			list->j * 64, list->i * 64);
-		list = list->next;
+		win->enemy = new;
+		return ;
 	}
+	last = get_last_elem(win->enemy);
+	last->next = new;
 }

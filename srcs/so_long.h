@@ -38,15 +38,19 @@ typedef struct s_player
 {
 	int		p_x;
 	int		p_y;
+	int		p_i;
+	int		p_j;
 	int		steps;
 	int		score;
 	int		lives;
+	int		is_moving;
 }	t_player;
 
 typedef struct s_enemy
 {
 	int				i;
 	int				j;
+	int				direction;
 	void			*img;
 	struct s_enemy	*next;
 }	t_enemy;
@@ -61,8 +65,21 @@ typedef struct s_map
 	int			c;
 	int			e;
 	int			p;
+	int			n;
 	t_vis		*v;
 }	t_map;
+
+typedef struct s_anim
+{
+	void	*pr1;
+	void	*pr2;
+	void	*pl1;
+	void	*pl2;
+	void	*ex_img;
+	void	*ex_open_img;
+	void	*demon_left;
+	void	*demon_right;
+}	t_anim;
 
 typedef struct s_img
 {
@@ -71,6 +88,8 @@ typedef struct s_img
 	void	*w_img;
 	void	*ex_img;
 	void	*p_img;
+	void	*demon_img;
+	t_anim	*anim;
 }	t_img;
 
 typedef struct s_win
@@ -79,6 +98,8 @@ typedef struct s_win
 	void		*win;
 	int			win_h;
 	int			win_w;
+	int			frame;
+	int			eframe;
 	t_map		*map;
 	t_player	*player;
 	t_enemy		*enemy;
@@ -99,31 +120,32 @@ void	good_map_structure(t_map *map);
 
 //make sure there is always a path to win
 void	is_there_a_path(t_win *win);
+void	get_new_vis(t_win *win, int a);
 void	dfs_c(int i, int j, t_map *map, int *a);
 void	dfs_e(int i, int j, t_map *map, int *a2);
 void	clear_vis(t_vis *v, int h, int w);
 void	free_vis(t_vis *v, int h);
 
+//init
+void	init(t_win *win, int *x, int *y);
+
 //enemy
-void	init_enemy(t_win *win);
-void	render_enemy(t_win *win);
+void	add_enemy_to_list(t_win *win, int i, int j);
+void	enemy_patrol(t_win *win);
+int		get_enemy_size(t_enemy *lst);
+void	hit_enemy(t_win *win, int i, int j);
 
 //render map
-void	update_pos_and_render(t_win *win, int type);
 void	render_map(t_win *win);
+void	render_enemy(t_win *win);
 void	put_img(char c, t_win *win, int x, int y);
-int		enemy_patrol(t_win *win);
-void	get_player_left_pic(t_win *win);
-void	get_player_right_pic(t_win *win);
+
+//animation
+int		animation(t_win *win);
 
 //movement
-void	move_up(t_win *win);
-void	move_down(t_win *win);
-void	move_left(t_win *win);
-void	move_right(t_win *win);
 int		key_on_pressed(int keycode, t_win *win);
 void	get_player_pos(t_win *win);
-int		movement_tracker(t_win *win, int dir_type, int w_type);
 
 //handle score and exit
 void	handle_score(t_win *win, int i, int j);

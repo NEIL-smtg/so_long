@@ -16,20 +16,24 @@ void	put_img(char c, t_win *win, int x, int y)
 {
 	if (c == '1')
 		mlx_put_image_to_window(win->mlx, win->win, win->img->w_img, x, y);
-	if (c == '0')
+	else if (c == '0' || c == 'P')
 		mlx_put_image_to_window(win->mlx, win->win, win->img->empty_img, x, y);
-	if (c == 'C')
+	else if (c == 'C')
 	{
 		mlx_put_image_to_window(win->mlx, win->win, win->img->empty_img, x, y);
 		mlx_put_image_to_window(win->mlx, win->win, win->img->c_img, x, y);
 	}
-	if (c == 'E')
+	else if (c == 'E')
 	{
 		mlx_put_image_to_window(win->mlx, win->win, win->img->empty_img, x, y);
 		mlx_put_image_to_window(win->mlx, win->win, win->img->ex_img, x, y);
 	}
-	if (c == 'P')
+	else
+	{
+		if (win->map->n != get_enemy_size(win->enemy))
+			add_enemy_to_list(win, y / 64, x / 64);
 		mlx_put_image_to_window(win->mlx, win->win, win->img->empty_img, x, y);
+	}
 }
 
 void	put_score_steps(t_win *win)
@@ -39,7 +43,6 @@ void	put_score_steps(t_win *win)
 
 	sc = ft_itoa(win->player->score);
 	st = ft_itoa(win->player->steps);
-	// mlx_string_put(win->mlx, win->win, win->map->w - 64 / 2.3, 64 - 64 / 15, -1, sc);
 	mlx_string_put(win->mlx, win->win, 10, 10, 0xFFFFFF, sc);
 	mlx_string_put(win->mlx, win->win, 10, 30, 0xFFFFFF, st);
 	free(sc);
@@ -70,5 +73,6 @@ void	render_map(t_win *win)
 	}
 	put_score_steps(win);
 	mlx_put_image_to_window(win->mlx, win->win, win->img->p_img,
-		win->player->p_x, win->player->p_y);
+		win->player->p_j * 64, win->player->p_i * 64);
+	render_enemy(win);
 }

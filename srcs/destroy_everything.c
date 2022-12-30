@@ -23,22 +23,16 @@ void	destroy_map(t_win *win)
 	free(win->map);
 }
 
-void	destroy_enemy(t_win *win)
+void	destroy_enemy(t_enemy *lst)
 {
 	t_enemy	*tmp;
-	t_enemy	*ey;
 
-	if (!win->enemy)
-		return ;
-	ey = win->enemy;
-	while (ey)
+	while (lst)
 	{
-		tmp = ey->next;
-		mlx_destroy_image(win->mlx, ey->img);
-		free(ey);
-		ey = tmp;
+		tmp = lst->next;
+		free(lst);
+		lst = tmp;
 	}
-	ey = NULL;
 }
 
 void	destroy_img(t_win *win)
@@ -46,18 +40,23 @@ void	destroy_img(t_win *win)
 	mlx_destroy_image(win->mlx, win->img->empty_img);
 	mlx_destroy_image(win->mlx, win->img->w_img);
 	mlx_destroy_image(win->mlx, win->img->c_img);
-	mlx_destroy_image(win->mlx, win->img->ex_img);
-	mlx_destroy_image(win->mlx, win->img->p_img);
+	mlx_destroy_image(win->mlx, win->img->anim->pl1);
+	mlx_destroy_image(win->mlx, win->img->anim->pl2);
+	mlx_destroy_image(win->mlx, win->img->anim->pr1);
+	mlx_destroy_image(win->mlx, win->img->anim->pr2);
+	mlx_destroy_image(win->mlx, win->img->anim->ex_img);
+	mlx_destroy_image(win->mlx, win->img->anim->ex_open_img);
+	mlx_destroy_image(win->mlx, win->img->anim->demon_left);
+	mlx_destroy_image(win->mlx, win->img->anim->demon_right);
+	free(win->img->anim);
 	free(win->img);
 }
 
 void	destroy_everything(t_win *win)
 {
-	int	i;
-
 	mlx_destroy_window(win->mlx, win->win);
 	destroy_map(win);
 	destroy_img(win);
-	destroy_enemy(win);
+	destroy_enemy(win->enemy);
 	free(win->player);
 }

@@ -45,8 +45,6 @@ void	check_collectible_exit(t_map *map)
 	int	j;
 
 	i = -1;
-	map->c = 0;
-	map->e = 0;
 	while (map->mapping[++i])
 	{
 		j = -1;
@@ -71,7 +69,6 @@ void	check_start_pos(t_map *map)
 	int	j;
 
 	i = -1;
-	map->p = 0;
 	while (map->mapping[++i])
 	{
 		j = -1;
@@ -92,8 +89,6 @@ void	check_invalid_ch(t_map *map)
 	int		j;
 	char	ch;
 
-	map->empty = 0;
-	map->wall = 0;
 	i = -1;
 	while (map->mapping[++i])
 	{
@@ -101,7 +96,8 @@ void	check_invalid_ch(t_map *map)
 		while (map->mapping[i][++j])
 		{
 			ch = map->mapping[i][j];
-			if (ch != '0' && ch != '1' && ch != 'C' && ch != 'E' && ch != 'P')
+			if (ch != '0' && ch != '1' && ch != 'C' && ch != 'E' && ch != 'P'
+				&& ch != 'N')
 			{
 				ft_printf("Error !!!\nWrong map input \"%c\"\n", ch);
 				free_map_exit(map);
@@ -110,6 +106,8 @@ void	check_invalid_ch(t_map *map)
 				map->empty++;
 			if (ch == '1')
 				map->wall++;
+			if (ch == 'N')
+				map->n++;
 		}
 	}
 }

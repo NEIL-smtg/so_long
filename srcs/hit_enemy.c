@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_player_pic.c                                   :+:      :+:    :+:   */
+/*   hit_enemy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/25 13:58:46 by suchua            #+#    #+#             */
-/*   Updated: 2022/12/25 13:58:46 by suchua           ###   ########.fr       */
+/*   Created: 2022/12/30 21:28:57 by suchua            #+#    #+#             */
+/*   Updated: 2022/12/30 21:28:57 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	get_player_left_pic(t_win *win)
+void	hit_enemy(t_win *win, int i , int j)
 {
-	int	x;
-	int	y;
+	t_enemy	*lst;
 
-	x = 0;
-	y = 0;
-	mlx_destroy_image(win->mlx, win->img->p_img);
-	win->img->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/pl.xpm", &x, &y);
-}
-
-void	get_player_right_pic(t_win *win)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	mlx_destroy_image(win->mlx, win->img->p_img);
-	win->img->p_img = mlx_xpm_file_to_image(win->mlx, "xpm/pr.xpm", &x, &y);
+	lst = win->enemy;
+	while (lst)
+	{
+		if (lst->i == i && lst->j == j)
+		{
+			win->player->lives--;
+			if (win->player->lives == 0)
+			{
+				ft_printf("You are dead !!!!\n");
+				return ;
+			}
+			get_player_pos(win);
+			mlx_clear_window(win->mlx, win->win);
+			render_map(win);
+			return ;
+		}
+		lst = lst->next;
+	}
 }
