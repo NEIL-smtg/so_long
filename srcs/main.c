@@ -33,6 +33,12 @@ void	get_player_pos(t_win *win)
 	}
 }
 
+int	destroy_exit(t_win *win)
+{
+	destroy_everything(win);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_win	win;
@@ -49,12 +55,13 @@ int	main(int ac, char **av)
 		render_map(&win);
 		mlx_hook(win.win, KEY_PRESS, (1L << 0), key_on_pressed, &win);
 		mlx_hook(win.win, KEY_RELEASE, (1L << 1), stop_animation, &win);
+		mlx_hook(win.win, 17, (1L << 5), destroy_exit, &win);
 		mlx_loop_hook(win.mlx, animation, &win);
 		mlx_loop(win.mlx);
 	}
 	else
 	{
-		ft_printf("map path not found\n");
+		ft_putstr_fd("Error !!\nWrong arguments..\n", 2);
 		exit(EXIT_FAILURE);
 	}
 }

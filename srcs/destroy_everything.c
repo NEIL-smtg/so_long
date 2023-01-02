@@ -50,13 +50,21 @@ void	destroy_img(t_win *win)
 	mlx_destroy_image(win->mlx, win->img->anim->pr2);
 	mlx_destroy_image(win->mlx, win->img->anim->pl_idle1);
 	mlx_destroy_image(win->mlx, win->img->anim->pl_idle2);
+	mlx_destroy_image(win->mlx, win->img->anim->pl_idle3);
 	mlx_destroy_image(win->mlx, win->img->anim->pr_idle1);
 	mlx_destroy_image(win->mlx, win->img->anim->pr_idle2);
+	mlx_destroy_image(win->mlx, win->img->anim->pr_idle3);
 	mlx_destroy_image(win->mlx, win->img->anim->ex_img);
 	mlx_destroy_image(win->mlx, win->img->anim->ex_open_img);
 	mlx_destroy_image(win->mlx, win->img->anim->demon_r1);
 	mlx_destroy_image(win->mlx, win->img->anim->demon_r2);
 	mlx_destroy_image(win->mlx, win->img->anim->demon_r3);
+}
+
+void	destroy_img2(t_win *win)
+{
+	mlx_destroy_image(win->mlx, win->img->sc_c_img);
+	mlx_destroy_image(win->mlx, win->img->steps_img);
 	free(win->img->anim);
 	free(win->img);
 }
@@ -66,6 +74,7 @@ void	destroy_everything(t_win *win)
 	mlx_destroy_window(win->mlx, win->win);
 	destroy_map(win);
 	destroy_img(win);
+	destroy_img2(win);
 	destroy_enemy(win->enemy);
 	free(win->player);
 }

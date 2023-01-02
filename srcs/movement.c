@@ -121,144 +121,55 @@ void	move_right(t_win *win)
 }
 
 // linux
-// int	key_on_pressed(int keycode, t_win *win)
-// {
-// 	if (keycode == 65307)
-// 	{
-// 		destroy_everything(win);
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	if (win->player->lives == 0)
-// 		return (0);
-// 	if (keycode == 'w' || keycode == 's' || keycode == 'a' || keycode == 'd')
-// 		win->player->is_moving = 1;
-// 	if (keycode == 'w')
-// 		move_up(win);
-// 	if (keycode == 's')
-// 		move_down(win);
-// 	if (keycode == 'a')
-// 		move_left(win);
-// 	if (keycode == 'd')
-// 		move_right(win);
-// 	return (0);
-// }
-
-//mac
 int	key_on_pressed(int keycode, t_win *win)
 {
-	if (keycode == 53)
+	if (keycode == 65307)
 	{
 		destroy_everything(win);
 		exit(EXIT_FAILURE);
 	}
 	if (win->player->lives == 0)
 	{
-		ft_printf("You are dead !!!!\n");
+		ft_putstr_fd("You are dead !!\n", 1);
 		return (0);
 	}
-	if (keycode == 13 || keycode == 1 || keycode == 0 || keycode == 2)
+	if (win->pause)
+		return (0);
+	if (keycode == 'w' || keycode == 's' || keycode == 'a' || keycode == 'd')
 		win->player->is_moving = 1;
-	if (keycode == 13)
+	if (keycode == 'w')
 		move_up(win);
-	if (keycode == 1)
+	if (keycode == 's')
 		move_down(win);
-	if (keycode == 0)
+	if (keycode == 'a')
 		move_left(win);
-	if (keycode == 2)
+	if (keycode == 'd')
 		move_right(win);
 	return (0);
 }
 
-// void	move_up(t_win *win)
+//mac
+// int	key_on_pressed(int keycode, t_win *win)
 // {
-// 	t_player	*p;
-// 	int			nx;
-// 	int			ny;
-
-// 	p = win->player;
-// 	nx = p->p_x / 64;
-// 	ny = (p->p_y - 16) / 64;
-// 	if (movement_tracker(win, UP, WALL))
-// 		return ;
-// 	if (movement_tracker(win, UP, COIN))
-// 		handle_score(win, ny, nx);
-// 	if (movement_tracker(win, UP, EX))
-// 		game_over(win);
-// 	p->p_y -= 16;
-// 	p->steps++;
-// 	mlx_clear_window(win->mlx, win->win);
-// 	render_map(win);
-// 	mlx_put_image_to_window(win->mlx, win->win,
-// 		win->img->p_img, p->p_x, p->p_y);
-// }
-
-// void	move_down(t_win *win)
-// {
-// 	t_player	*p;
-// 	int			nx;
-// 	int			ny;
-
-// 	p = win->player;
-// 	nx = p->p_x / 64;
-// 	ny = (p->p_y + 64) / 64;
-// 	if (movement_tracker(win, DOWN, WALL))
-// 		return ;
-// 	if (movement_tracker(win, DOWN, COIN))
-// 		handle_score(win, ny, nx);
-// 	if (movement_tracker(win, DOWN, EX))
-// 		game_over(win);
-// 	p->p_y += 16;
-// 	p->steps++;
-// 	mlx_clear_window(win->mlx, win->win);
-// 	render_map(win);
-// 	mlx_put_image_to_window(win->mlx, win->win,
-// 		win->img->p_img, p->p_x, p->p_y);
-// }
-
-// void	move_left(t_win *win)
-// {
-// 	t_player	*p;
-// 	int			nx;
-// 	int			ny;
-
-// 	p = win->player;
-// 	nx = (p->p_x - 16) / 64;
-// 	ny = p->p_y / 64;
-// 	if (movement_tracker(win, LEFT, WALL))
-// 		return ;
-// 	if (movement_tracker(win, LEFT, COIN))
-// 		handle_score(win, ny, nx);
-// 	if (movement_tracker(win, LEFT, EX))
-// 		game_over(win);
-// 	p->p_x -= 16;
-// 	p->steps++;
-// 	mlx_clear_window(win->mlx, win->win);
-// 	render_map(win);
-// 	get_player_left_pic(win);
-// 	mlx_put_image_to_window(win->mlx, win->win,
-// 		win->img->p_img, p->p_x, p->p_y);
-// }
-
-// void	move_right(t_win *win)
-// {
-// 	t_player	*p;
-// 	int			nx;
-// 	int			ny;
-
-// 	p = win->player;
-// 	nx = (p->p_x + 64) / 64;
-// 	ny = p->p_y / 64;
-// 	if (movement_tracker(win, RIGHT, WALL))
-// 		return ;
-// 	if (movement_tracker(win, RIGHT, COIN))
-// 		handle_score(win, ny, nx);
-// 	if (movement_tracker(win, RIGHT, EX))
-// 		game_over(win);
-// 	p->p_x += 16;
-// 	p->steps++;
-// 	mlx_clear_window(win->mlx, win->win);
-// 	render_map(win);
-// 	get_player_right_pic(win);
-// 	mlx_put_image_to_window(win->mlx, win->win,
-// 		win->img->p_img, p->p_x, p->p_y);
+// 	if (keycode == 53)
+// 	{
+// 		destroy_everything(win);
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	if (win->player->lives == 0)
+// 	{
+// 		ft_printf("You are dead !!!!\n");
+// 		return (0);
+// 	}
+// 	if (keycode == 13 || keycode == 1 || keycode == 0 || keycode == 2)
+// 		win->player->is_moving = 1;
+// 	if (keycode == 13)
+// 		move_up(win);
+// 	if (keycode == 1)
+// 		move_down(win);
+// 	if (keycode == 0)
+// 		move_left(win);
+// 	if (keycode == 2)
+// 		move_right(win);
+// 	return (0);
 // }

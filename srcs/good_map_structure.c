@@ -62,7 +62,7 @@ void	is_there_a_path(t_win *win)
 	free_vis(win->map->v, win->map->h);
 	if (a == win->map->c && a2 > 0)
 		return ;
-	ft_printf("Error !!\nThere is no path to win !!\n");
+	ft_putstr_fd("Error !!\nThere is no path to win !!\n", 2);
 	free_map_exit(win->map);
 }
 

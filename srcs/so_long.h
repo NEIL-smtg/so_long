@@ -55,6 +55,7 @@ typedef struct s_enemy
 	int				j;
 	int				direction;
 	void			*img;
+	int				**path;
 	struct s_enemy	*next;
 }	t_enemy;
 
@@ -80,8 +81,10 @@ typedef struct s_anim
 	void	*pl2;
 	void	*pr_idle1;
 	void	*pr_idle2;
+	void	*pr_idle3;
 	void	*pl_idle1;
 	void	*pl_idle2;
+	void	*pl_idle3;
 	void	*ex_img;
 	void	*ex_open_img;
 	void	*demon_r1;
@@ -102,6 +105,7 @@ typedef struct s_img
 	void	*p_img;
 	void	*health_bar;
 	void	*steps_img;
+	void	*sc_c_img;
 	t_anim	*anim;
 }	t_img;
 
@@ -112,6 +116,7 @@ typedef struct s_win
 	int			win_h;
 	int			win_w;
 	int			frame;
+	int			pause;
 	t_map		*map;
 	t_player	*player;
 	t_enemy		*enemy;
@@ -160,6 +165,7 @@ int		animation(t_win *win);
 void	health_bar_animation(int lives, t_anim *a, t_img *i);
 int		stop_animation(int keycode, t_win *win);
 void	player_idle(int is_moving, t_img *img, t_anim *a);
+void	spawn_player_animation(t_win *win);
 
 //movement
 int		key_on_pressed(int keycode, t_win *win);

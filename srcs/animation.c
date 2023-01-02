@@ -67,12 +67,17 @@ int	animation(t_win *win)
 	if (win->player->lives == 0)
 		return (0);
 	win->frame++;
-	if (win->frame != 2000)
+	if (win->pause)
+	{
+		spawn_player_animation(win);
+		return (0);
+	}
+	if (win->frame != 5000)
 		return (0);
 	player_idle(win->player->is_moving, win->img, win->img->anim);
 	walking(win);
 	enemy_animation(win->enemy, win->img->anim);
-	enemy_patrol(win);
+	// enemy_patrol(win);
 	mlx_clear_window(win->mlx, win->win);
 	render_map(win);
 	win->frame = 0;

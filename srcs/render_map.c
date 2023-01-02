@@ -55,14 +55,13 @@ void	put_score_steps(t_win *win)
 
 	sc = ft_itoa(win->player->score);
 	st = ft_itoa(win->player->steps);
-	x = win->win_w / 2;
-	y = 16;
-	if (win->player->lives == 0)
-		mlx_put_image_to_window(win->mlx, win->win, win->img->empty_img,
-			x - 64 * 2, 0);
+	x = 64 * 3;
+	y = 32;
 	mlx_put_image_to_window(win->mlx, win->win, win->img->health_bar, 10, 10);
-	mlx_string_put(win->mlx, win->win, x - 64, y, 0xFFFFFF, sc);
-	mlx_string_put(win->mlx, win->win, x, y, 0xFFFFFF, st);
+	mlx_put_image_to_window(win->mlx, win->win, win->img->sc_c_img, x, y / 2);
+	mlx_string_put(win->mlx, win->win, x + 48, y, 0xFFFF, sc);
+	mlx_put_image_to_window(win->mlx, win->win, win->img->steps_img, x + 48 + 32, y / 2);
+	mlx_string_put(win->mlx, win->win, x + 48 + 80, y, 0xFFFF, st);
 	free(sc);
 	free(st);
 }

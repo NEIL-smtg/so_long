@@ -23,13 +23,17 @@ void	init_player(t_win *win, int *x, int *y)
 	win->img->anim->pr2 = mlx_xpm_file_to_image(win->mlx,
 			"xpm/pr1.xpm", x, y);
 	win->img->anim->pr_idle1 = mlx_xpm_file_to_image(win->mlx,
-			"xpm/pl.xpm", x, y);
+			"xpm/pr_idle1.xpm", x, y);
 	win->img->anim->pr_idle2 = mlx_xpm_file_to_image(win->mlx,
-			"xpm/pr.xpm", x, y);
+			"xpm/pr_idle2.xpm", x, y);
+	win->img->anim->pr_idle3 = mlx_xpm_file_to_image(win->mlx,
+			"xpm/pr_idle3.xpm", x, y);
+	win->img->anim->pl_idle1 = mlx_xpm_file_to_image(win->mlx,
+			"xpm/pl_idle1.xpm", x, y);
 	win->img->anim->pl_idle2 = mlx_xpm_file_to_image(win->mlx,
-			"xpm/pl1.xpm", x, y);
-	win->img->anim->pl_idle2 = mlx_xpm_file_to_image(win->mlx,
-			"xpm/pr1.xpm", x, y);
+			"xpm/pl_idle2.xpm", x, y);
+	win->img->anim->pl_idle3 = mlx_xpm_file_to_image(win->mlx,
+			"xpm/pl_idle3.xpm", x, y);
 }
 
 void	init_mp_imgs(t_win *win, int *x, int *y)
@@ -72,8 +76,10 @@ void	init_imgs(t_win *win, int *x, int *y)
 			"xpm/demon_r2.xpm", x, y);
 	win->img->anim->demon_r3 = mlx_xpm_file_to_image(win->mlx,
 			"xpm/demon_r3.xpm", x, y);
-	// win->img->steps = mlx_xpm_file_to_image(win->mlx,
-	// 		"xpm/footprint.xpm", x, y);
+	win->img->sc_c_img = mlx_xpm_file_to_image(win->mlx, 
+			"xpm/sc_coin.xpm", x, y);
+	win->img->steps_img = mlx_xpm_file_to_image(win->mlx,
+			"xpm/feet.xpm", x, y);
 	win->img->p_img = win->img->anim->pr1;
 	win->img->ex_img = win->img->anim->ex_img;
 }
@@ -83,6 +89,7 @@ void	init(t_win *win, int *x, int *y)
 	win->win_h = win->map->h * 64;
 	win->win_w = win->map->w * 64;
 	win->frame = 0;
+	win->pause = 0;
 	win->mlx = mlx_init();
 	win->win = mlx_new_window(win->mlx, win->win_w, win->win_h,
 			"SOOOOO FUCKING LOOOOOONG !!!");

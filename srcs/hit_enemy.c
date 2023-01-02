@@ -28,6 +28,7 @@ void	hit_enemy(t_win *win, int i, int j)
 				ft_printf("You are dead !!!!\n");
 				return ;
 			}
+			win->pause = 1;
 			get_player_pos(win);
 			mlx_clear_window(win->mlx, win->win);
 			render_map(win);
