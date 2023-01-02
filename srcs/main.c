@@ -25,8 +25,6 @@ void	get_player_pos(t_win *win)
 		{
 			if (win->map->mapping[i][j] == 'P')
 			{
-				// win->player->p_x = j * 64;
-				// win->player->p_y = i * 64;
 				win->player->p_i = i;
 				win->player->p_j = j;
 				return ;
@@ -49,7 +47,8 @@ int	main(int ac, char **av)
 		get_map(av[1], &win);
 		init(&win, &x, &y);
 		render_map(&win);
-		mlx_hook(win.win, 2, (1L << 0), key_on_pressed, &win);
+		mlx_hook(win.win, KEY_PRESS, (1L << 0), key_on_pressed, &win);
+		mlx_hook(win.win, KEY_RELEASE, (1L << 1), stop_animation, &win);
 		mlx_loop_hook(win.mlx, animation, &win);
 		mlx_loop(win.mlx);
 	}

@@ -12,6 +12,14 @@
 
 #include "so_long.h"
 
+void	refresh_screen(t_win *win)
+{
+	if (win->frame == 2000)
+		return ;
+	mlx_clear_window(win->mlx, win->win);
+	render_map(win);
+}
+
 void	put_img(char c, t_win *win, int x, int y)
 {
 	if (c == '1')
@@ -25,7 +33,9 @@ void	put_img(char c, t_win *win, int x, int y)
 	}
 	else if (c == 'E')
 	{
-		mlx_put_image_to_window(win->mlx, win->win, win->img->empty_img, x, y);
+		if (win->map->c > 0)
+			mlx_put_image_to_window(win->mlx, win->win,
+				win->img->empty_img, x, y);
 		mlx_put_image_to_window(win->mlx, win->win, win->img->ex_img, x, y);
 	}
 	else
@@ -40,11 +50,19 @@ void	put_score_steps(t_win *win)
 {
 	char	*sc;
 	char	*st;
+	int		x;
+	int		y;
 
 	sc = ft_itoa(win->player->score);
 	st = ft_itoa(win->player->steps);
-	mlx_string_put(win->mlx, win->win, 10, 10, 0xFFFFFF, sc);
-	mlx_string_put(win->mlx, win->win, 10, 30, 0xFFFFFF, st);
+	x = win->win_w / 2;
+	y = 16;
+	if (win->player->lives == 0)
+		mlx_put_image_to_window(win->mlx, win->win, win->img->empty_img,
+			x - 64 * 2, 0);
+	mlx_put_image_to_window(win->mlx, win->win, win->img->health_bar, 10, 10);
+	mlx_string_put(win->mlx, win->win, x - 64, y, 0xFFFFFF, sc);
+	mlx_string_put(win->mlx, win->win, x, y, 0xFFFFFF, st);
 	free(sc);
 	free(st);
 }

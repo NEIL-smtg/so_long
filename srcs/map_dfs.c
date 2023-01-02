@@ -20,7 +20,7 @@ void	dfs_c(int i, int j, t_map *map, int *a)
 		return ;
 	if (map->v->vis[i][j])
 		return ;
-	if (map->mapping[i][j] == '1' || map->mapping[i][j] == 'E')
+	if (map->mapping[i][j] == '1')
 		return ;
 	if (map->mapping[i][j] == 'P')
 	{

@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	hit_enemy(t_win *win, int i , int j)
+void	hit_enemy(t_win *win, int i, int j)
 {
 	t_enemy	*lst;
 
@@ -22,6 +22,7 @@ void	hit_enemy(t_win *win, int i , int j)
 		if (lst->i == i && lst->j == j)
 		{
 			win->player->lives--;
+			health_bar_animation(win->player->lives, win->img->anim, win->img);
 			if (win->player->lives == 0)
 			{
 				ft_printf("You are dead !!!!\n");

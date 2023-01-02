@@ -40,14 +40,23 @@ void	destroy_img(t_win *win)
 	mlx_destroy_image(win->mlx, win->img->empty_img);
 	mlx_destroy_image(win->mlx, win->img->w_img);
 	mlx_destroy_image(win->mlx, win->img->c_img);
+	mlx_destroy_image(win->mlx, win->img->anim->lives_dead);
+	mlx_destroy_image(win->mlx, win->img->anim->lives_full);
+	mlx_destroy_image(win->mlx, win->img->anim->lives_half);
+	mlx_destroy_image(win->mlx, win->img->anim->lives_low);
 	mlx_destroy_image(win->mlx, win->img->anim->pl1);
 	mlx_destroy_image(win->mlx, win->img->anim->pl2);
 	mlx_destroy_image(win->mlx, win->img->anim->pr1);
 	mlx_destroy_image(win->mlx, win->img->anim->pr2);
+	mlx_destroy_image(win->mlx, win->img->anim->pl_idle1);
+	mlx_destroy_image(win->mlx, win->img->anim->pl_idle2);
+	mlx_destroy_image(win->mlx, win->img->anim->pr_idle1);
+	mlx_destroy_image(win->mlx, win->img->anim->pr_idle2);
 	mlx_destroy_image(win->mlx, win->img->anim->ex_img);
 	mlx_destroy_image(win->mlx, win->img->anim->ex_open_img);
-	mlx_destroy_image(win->mlx, win->img->anim->demon_left);
-	mlx_destroy_image(win->mlx, win->img->anim->demon_right);
+	mlx_destroy_image(win->mlx, win->img->anim->demon_r1);
+	mlx_destroy_image(win->mlx, win->img->anim->demon_r2);
+	mlx_destroy_image(win->mlx, win->img->anim->demon_r3);
 	free(win->img->anim);
 	free(win->img);
 }

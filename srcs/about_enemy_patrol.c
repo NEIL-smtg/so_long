@@ -39,7 +39,6 @@ void	next_move(t_enemy **node, char **mp)
 		(*node)->i++;
 	else if (dir != DOWN && mp[i - 1][j] != '1' && mp[i - 1][j] != 'C')
 		(*node)->i--;
-
 }
 
 void	enemy_patrol(t_win *win)
@@ -49,7 +48,7 @@ void	enemy_patrol(t_win *win)
 	lst = win->enemy;
 	while (lst)
 	{
-		next_move(&lst, win->map->mapping);
+		// next_move(&lst, win->map->mapping);
 		hit_enemy(win, win->player->p_i, win->player->p_j);
 		lst = lst->next;
 	}

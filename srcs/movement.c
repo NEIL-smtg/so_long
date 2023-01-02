@@ -34,9 +34,7 @@ void	move_up(t_win *win)
 	win->player->steps++;
 	if (!win->map->c)
 		win->img->ex_img = win->img->anim->ex_open_img;
-	mlx_clear_window(win->mlx, win->win);
-	render_map(win);
-	win->player->is_moving = 0;
+	refresh_screen(win);
 }
 
 void	move_down(t_win *win)
@@ -61,9 +59,7 @@ void	move_down(t_win *win)
 	win->player->steps++;
 	if (!win->map->c)
 		win->img->ex_img = win->img->anim->ex_open_img;
-	mlx_clear_window(win->mlx, win->win);
-	render_map(win);
-	win->player->is_moving = 0;
+	refresh_screen(win);
 }
 
 void	move_left(t_win *win)
@@ -88,10 +84,11 @@ void	move_left(t_win *win)
 	win->player->steps++;
 	if (!win->map->c)
 		win->img->ex_img = win->img->anim->ex_open_img;
-	win->img->p_img = win->img->anim->pl1;
-	mlx_clear_window(win->mlx, win->win);
-	render_map(win);
-	win->player->is_moving = 0;
+	if (win->img->p_img == win->img->anim->pr1)
+		win->img->p_img = win->img->anim->pl1;
+	else
+		win->img->p_img = win->img->anim->pl2;
+	refresh_screen(win);
 }
 
 void	move_right(t_win *win)
@@ -116,53 +113,61 @@ void	move_right(t_win *win)
 	win->player->steps++;
 	if (!win->map->c)
 		win->img->ex_img = win->img->anim->ex_open_img;
-	win->img->p_img = win->img->anim->pr1;
-	mlx_clear_window(win->mlx, win->win);
-	render_map(win);
-	win->player->is_moving = 0;
+	if (win->img->p_img == win->img->anim->pl1)
+		win->img->p_img = win->img->anim->pr1;
+	else
+		win->img->p_img = win->img->anim->pr2;
+	refresh_screen(win);
 }
 
 // linux
+// int	key_on_pressed(int keycode, t_win *win)
+// {
+// 	if (keycode == 65307)
+// 	{
+// 		destroy_everything(win);
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	if (win->player->lives == 0)
+// 		return (0);
+// 	if (keycode == 'w' || keycode == 's' || keycode == 'a' || keycode == 'd')
+// 		win->player->is_moving = 1;
+// 	if (keycode == 'w')
+// 		move_up(win);
+// 	if (keycode == 's')
+// 		move_down(win);
+// 	if (keycode == 'a')
+// 		move_left(win);
+// 	if (keycode == 'd')
+// 		move_right(win);
+// 	return (0);
+// }
+
+//mac
 int	key_on_pressed(int keycode, t_win *win)
 {
-	if (keycode == 65307)
+	if (keycode == 53)
 	{
 		destroy_everything(win);
 		exit(EXIT_FAILURE);
 	}
 	if (win->player->lives == 0)
+	{
+		ft_printf("You are dead !!!!\n");
 		return (0);
-	if (keycode == 'w' || keycode == 's' || keycode == 'a' || keycode == 'd')
+	}
+	if (keycode == 13 || keycode == 1 || keycode == 0 || keycode == 2)
 		win->player->is_moving = 1;
-	if (keycode == 'w')
+	if (keycode == 13)
 		move_up(win);
-	if (keycode == 's')
+	if (keycode == 1)
 		move_down(win);
-	if (keycode == 'a')
+	if (keycode == 0)
 		move_left(win);
-	if (keycode == 'd')
+	if (keycode == 2)
 		move_right(win);
 	return (0);
 }
-
-//mac
-// int	key_on_pressed(int keycode, t_win *win)
-// {
-// 	if (keycode == 53)
-// 	{
-// 		destroy_everything(win);
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	if (keycode == 13)
-// 		move_up(win);
-// 	else if (keycode == 1)
-// 		move_down(win);
-// 	else if (keycode == 0)
-// 		move_left(win);
-// 	else if (keycode == 2)
-// 		move_right(win);
-// 	return (0);
-// }
 
 // void	move_up(t_win *win)
 // {

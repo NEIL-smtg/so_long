@@ -17,6 +17,11 @@
 # include "../Libft/get_next_line/get_next_line_bonus.h"
 # include <fcntl.h>
 # include <mlx.h>
+
+//events
+# define KEY_PRESS 2
+# define KEY_RELEASE 3
+
 //player movement
 # define LEFT 1
 # define RIGHT 2
@@ -36,8 +41,6 @@ typedef struct s_vis
 
 typedef struct s_player
 {
-	int		p_x;
-	int		p_y;
 	int		p_i;
 	int		p_j;
 	int		steps;
@@ -75,10 +78,19 @@ typedef struct s_anim
 	void	*pr2;
 	void	*pl1;
 	void	*pl2;
+	void	*pr_idle1;
+	void	*pr_idle2;
+	void	*pl_idle1;
+	void	*pl_idle2;
 	void	*ex_img;
 	void	*ex_open_img;
-	void	*demon_left;
-	void	*demon_right;
+	void	*demon_r1;
+	void	*demon_r2;
+	void	*demon_r3;
+	void	*lives_full;
+	void	*lives_half;
+	void	*lives_low;
+	void	*lives_dead;
 }	t_anim;
 
 typedef struct s_img
@@ -88,7 +100,8 @@ typedef struct s_img
 	void	*w_img;
 	void	*ex_img;
 	void	*p_img;
-	void	*demon_img;
+	void	*health_bar;
+	void	*steps_img;
 	t_anim	*anim;
 }	t_img;
 
@@ -99,7 +112,6 @@ typedef struct s_win
 	int			win_h;
 	int			win_w;
 	int			frame;
-	int			eframe;
 	t_map		*map;
 	t_player	*player;
 	t_enemy		*enemy;
@@ -135,6 +147,9 @@ void	enemy_patrol(t_win *win);
 int		get_enemy_size(t_enemy *lst);
 void	hit_enemy(t_win *win, int i, int j);
 
+//update
+void	refresh_screen(t_win *win);
+
 //render map
 void	render_map(t_win *win);
 void	render_enemy(t_win *win);
@@ -142,6 +157,9 @@ void	put_img(char c, t_win *win, int x, int y);
 
 //animation
 int		animation(t_win *win);
+void	health_bar_animation(int lives, t_anim *a, t_img *i);
+int		stop_animation(int keycode, t_win *win);
+void	player_idle(int is_moving, t_img *img, t_anim *a);
 
 //movement
 int		key_on_pressed(int keycode, t_win *win);

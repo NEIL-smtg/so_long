@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   about_enemy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+        */
+/*   By: suchua <suchua@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:31:47 by suchua            #+#    #+#             */
-/*   Updated: 2022/12/31 00:04:04 by suchua           ###   ########.fr       */
+/*   Updated: 2023/01/02 12:22:41 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	add_enemy_to_list(t_win *win, int i, int j)
 	new->i = i;
 	new->j = j;
 	new->next = NULL;
-	new->img = win->img->anim->demon_right;
+	new->img = win->img->anim->demon_r1;
 	new->direction = RIGHT;
 	if (!win->enemy)
 	{

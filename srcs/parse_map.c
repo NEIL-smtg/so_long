@@ -42,18 +42,19 @@ void	init_map(t_map *map)
 	map->e = 0;
 }
 
-void	valid_map(t_map *map)
+void	valid_map(t_win *win)
 {
-	check_len(map);
-	if (map->w == map->h)
+	check_len(win->map);
+	if (win->map->w == win->map->h)
 	{
 		ft_printf("Error !!\nMap has to be in rectangle shape !!\n");
-		free_map_exit(map);
+		free_map_exit(win->map);
 	}
-	check_collectible_exit(map);
-	check_start_pos(map);
-	check_invalid_ch(map);
-	good_map_structure(map);
+	check_collectible_exit(win->map);
+	check_start_pos(win->map);
+	check_invalid_ch(win->map);
+	good_map_structure(win->map);
+	is_there_a_path(win);
 }
 
 void	free_liness_exit(char *line1, char *line2)
@@ -88,6 +89,5 @@ void	get_map(char *path, t_win *win)
 	win->map->mapping = ft_split(whole, '\n');
 	free(whole);
 	init_map(win->map);
-	valid_map(win->map);
-	is_there_a_path(win);
+	valid_map(win);
 }
