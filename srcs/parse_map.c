@@ -19,7 +19,7 @@ void	ft_check_map_path(char *path)
 	map_fd = open(path, O_RDONLY);
 	if (map_fd <= 0)
 	{
-		ft_printf("Wrong path !\n");
+		ft_putendl_fd("Wrong path !\n", 2);
 		close(map_fd);
 		exit(EXIT_FAILURE);
 	}
@@ -47,7 +47,7 @@ void	valid_map(t_win *win)
 	check_len(win->map);
 	if (win->map->w == win->map->h)
 	{
-		ft_printf("Error !!\nMap has to be in rectangle shape !!\n");
+		ft_putendl_fd("Error !!\nMap has to be in rectangle shape !!\n", 2);
 		free_map_exit(win->map);
 	}
 	check_collectible_exit(win->map);
@@ -61,7 +61,7 @@ void	free_liness_exit(char *line1, char *line2)
 {
 	free(line1);
 	free(line2);
-	ft_printf("Error !!!\nEmpty line !\n");
+	ft_putendl_fd("Error !!!\nEmpty line !\n", 2);
 	exit(EXIT_FAILURE);
 }
 

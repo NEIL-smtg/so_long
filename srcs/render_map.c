@@ -48,22 +48,23 @@ void	put_img(char c, t_win *win, int x, int y)
 
 void	put_score_steps(t_win *win)
 {
-	char	*sc;
-	char	*st;
+	char	*score;
+	char	*step;
 	int		x;
 	int		y;
 
-	sc = ft_itoa(win->player->score);
-	st = ft_itoa(win->player->steps);
+	score = ft_itoa(win->player->score);
+	step = ft_itoa(win->player->steps);
 	x = 64 * 3;
-	y = 32;
+	y = 16;
 	mlx_put_image_to_window(win->mlx, win->win, win->img->health_bar, 10, 10);
-	mlx_put_image_to_window(win->mlx, win->win, win->img->sc_c_img, x, y / 2);
-	mlx_string_put(win->mlx, win->win, x + 48, y, 0xFFFF, sc);
-	mlx_put_image_to_window(win->mlx, win->win, win->img->steps_img, x + 48 + 32, y / 2);
-	mlx_string_put(win->mlx, win->win, x + 48 + 80, y, 0xFFFF, st);
-	free(sc);
-	free(st);
+	mlx_put_image_to_window(win->mlx, win->win, win->img->sc_c_img, x, y);
+	mlx_string_put(win->mlx, win->win, x + 36, y + 8, 0xFFFF, score);
+	mlx_put_image_to_window(win->mlx, win->win, win->img->steps_img,
+		x + 80, y);
+	mlx_string_put(win->mlx, win->win, x + 120, y + 8, 0xFFFF, step);
+	free(score);
+	free(step);
 }
 
 void	render_map(t_win *win)

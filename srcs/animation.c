@@ -27,7 +27,7 @@ void	walking(t_win *win)
 		i->p_img = an->pr1;
 	else if (i->p_img == an->pl1)
 		i->p_img = an->pl2;
-	else
+	else if (i->p_img == an->pl2)
 		i->p_img = an->pl1;
 }
 
@@ -77,7 +77,7 @@ int	animation(t_win *win)
 	player_idle(win->player->is_moving, win->img, win->img->anim);
 	walking(win);
 	enemy_animation(win->enemy, win->img->anim);
-	// enemy_patrol(win);
+	enemy_patrol(win);
 	mlx_clear_window(win->mlx, win->win);
 	render_map(win);
 	win->frame = 0;

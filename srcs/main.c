@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	get_player_pos(t_win *win)
+void	set_player_pos(t_win *win)
 {
 	int	i;
 	int	j;
@@ -27,6 +27,8 @@ void	get_player_pos(t_win *win)
 			{
 				win->player->p_i = i;
 				win->player->p_j = j;
+				win->player->ori_pi = i;
+				win->player->ori_pj = j;
 				return ;
 			}
 		}
@@ -36,7 +38,7 @@ void	get_player_pos(t_win *win)
 int	destroy_exit(t_win *win)
 {
 	destroy_everything(win);
-	return (0);
+	exit(EXIT_FAILURE);
 }
 
 int	main(int ac, char **av)
@@ -55,7 +57,7 @@ int	main(int ac, char **av)
 		render_map(&win);
 		mlx_hook(win.win, KEY_PRESS, (1L << 0), key_on_pressed, &win);
 		mlx_hook(win.win, KEY_RELEASE, (1L << 1), stop_animation, &win);
-		mlx_hook(win.win, 17, (1L << 5), destroy_exit, &win);
+		mlx_hook(win.win, 17, (1L << 0), destroy_exit, &win);
 		mlx_loop_hook(win.mlx, animation, &win);
 		mlx_loop(win.mlx);
 	}

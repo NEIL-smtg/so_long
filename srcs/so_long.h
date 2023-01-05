@@ -43,6 +43,8 @@ typedef struct s_player
 {
 	int		p_i;
 	int		p_j;
+	int		ori_pi;
+	int		ori_pj;
 	int		steps;
 	int		score;
 	int		lives;
@@ -145,6 +147,7 @@ void	free_vis(t_vis *v, int h);
 
 //init
 void	init(t_win *win, int *x, int *y);
+void	set_player_pos(t_win *win);
 
 //enemy
 void	add_enemy_to_list(t_win *win, int i, int j);
@@ -154,6 +157,9 @@ void	hit_enemy(t_win *win, int i, int j);
 
 //update
 void	refresh_screen(t_win *win);
+
+// print steps in terminal
+void	print_step(char *step);
 
 //render map
 void	render_map(t_win *win);
@@ -166,10 +172,14 @@ void	health_bar_animation(int lives, t_anim *a, t_img *i);
 int		stop_animation(int keycode, t_win *win);
 void	player_idle(int is_moving, t_img *img, t_anim *a);
 void	spawn_player_animation(t_win *win);
+void	player_animation_transition(t_img *img, t_anim *a, int dir);
+
+//math
+double	ft_pow(double x, int n);
+double	ft_sqrt(double nb);
 
 //movement
 int		key_on_pressed(int keycode, t_win *win);
-void	get_player_pos(t_win *win);
 
 //handle score and exit
 void	handle_score(t_win *win, int i, int j);

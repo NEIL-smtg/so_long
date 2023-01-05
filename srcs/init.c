@@ -76,7 +76,7 @@ void	init_imgs(t_win *win, int *x, int *y)
 			"xpm/demon_r2.xpm", x, y);
 	win->img->anim->demon_r3 = mlx_xpm_file_to_image(win->mlx,
 			"xpm/demon_r3.xpm", x, y);
-	win->img->sc_c_img = mlx_xpm_file_to_image(win->mlx, 
+	win->img->sc_c_img = mlx_xpm_file_to_image(win->mlx,
 			"xpm/sc_coin.xpm", x, y);
 	win->img->steps_img = mlx_xpm_file_to_image(win->mlx,
 			"xpm/feet.xpm", x, y);
@@ -94,7 +94,7 @@ void	init(t_win *win, int *x, int *y)
 	win->win = mlx_new_window(win->mlx, win->win_w, win->win_h,
 			"SOOOOO FUCKING LOOOOOONG !!!");
 	win->player = ft_calloc(1, sizeof(t_player));
-	get_player_pos(win);
+	set_player_pos(win);
 	win->player->score = 0;
 	win->player->lives = 3;
 	win->player->steps = 0;
