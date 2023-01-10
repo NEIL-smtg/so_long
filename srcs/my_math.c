@@ -6,18 +6,11 @@
 /*   By: suchua <suchua@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 16:10:44 by suchua            #+#    #+#             */
-/*   Updated: 2023/01/05 16:14:13 by suchua           ###   ########.fr       */
+/*   Updated: 2023/01/10 16:40:21 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	ft_abs(int a)
-{
-	if (a < 0)
-		return (-a);
-	return (a);
-}
 
 double	ft_pow(double x, int n)
 {
@@ -25,7 +18,7 @@ double	ft_pow(double x, int n)
 		return (1);
 	if (n < 0)
 	{
-		n = ft_abs(n);
+		n = -n;
 		x = 1 / x;
 	}
 	if (n % 2 == 0)

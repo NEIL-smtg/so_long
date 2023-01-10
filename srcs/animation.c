@@ -64,7 +64,7 @@ int	stop_animation(int keycode, t_win *win)
 
 int	animation(t_win *win)
 {
-	if (win->player->lives == 0)
+	if (win->player->lives <= 0)
 		return (0);
 	win->frame++;
 	if (win->pause)
@@ -72,7 +72,7 @@ int	animation(t_win *win)
 		spawn_player_animation(win);
 		return (0);
 	}
-	if (win->frame != 5000)
+	if (win->frame != 8000)
 		return (0);
 	player_idle(win->player->is_moving, win->img, win->img->anim);
 	walking(win);

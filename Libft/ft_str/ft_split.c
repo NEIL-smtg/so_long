@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+        */
+/*   By: suchua <suchua@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 16:33:34 by suchua            #+#    #+#             */
-/*   Updated: 2022/12/12 05:34:16 by suchua           ###   ########.fr       */
+/*   Updated: 2023/01/05 19:30:26 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ char	**ft_split(char const *s, char c)
 	new_arr = (char **) malloc (get_row_num(s, c) * sizeof(char *));
 	while (i < get_row_num(s, c) - 1)
 	{
-		new_arr[i] = (char *) ft_calloc(get_strlen(s, c, (i + 1)), sizeof(char));
+		new_arr[i] = (char *) ft_calloc(get_strlen(s, c, (i + 1)),
+				sizeof(char));
 		save_str(new_arr[i], s, c, (i + 1));
 		i++;
 	}

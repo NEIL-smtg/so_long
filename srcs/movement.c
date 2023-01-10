@@ -154,7 +154,7 @@ int	key_on_pressed(int keycode, t_win *win)
 		destroy_everything(win);
 		exit(EXIT_FAILURE);
 	}
-	if (win->player->lives == 0)
+	if (win->player->lives <= 0)
 	{
 		ft_printf("You are dead !!!!\n");
 		return (0);

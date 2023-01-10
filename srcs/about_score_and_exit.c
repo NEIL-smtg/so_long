@@ -36,5 +36,6 @@ int	game_over(t_win *win)
 		return (0);
 	ft_printf("YOU WON THIS GAME !!!\n");
 	destroy_everything(win);
+	system("leaks so_long");
 	exit(EXIT_FAILURE);
 }

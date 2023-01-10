@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+         #
+#    By: suchua <suchua@student.42kl.edu.my>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 12:01:03 by suchua            #+#    #+#              #
-#    Updated: 2022/12/08 17:15:49 by suchua           ###   ########.fr        #
+#    Updated: 2023/01/10 19:16:09 by suchua           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,17 +66,19 @@ CFLAGS  	=    -Wall -Wextra -Werror
 GCC     	=    gcc
 
 .c.o:
-	$(GCC) $(CFLAGS) -c $< -o $(<:.c=.o)
+	@$(GCC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 all: $(NAME)
 
 $(NAME):    $(OBJS)
-	ar -crs $(NAME) $(OBJS)
+	@ar -crs $(NAME) $(OBJS)
 
 clean:
-	rm -rf $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean:    clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
-re:    fclean all
+re:
+	@make fclean
+	@make all

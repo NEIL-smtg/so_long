@@ -12,15 +12,14 @@
 
 #include "so_long.h"
 
-int	move_enemy(t_enemy **node, int i, int j, t_map *m)
+double	sum_pow(int i1, int i2, int j1, int j2)
 {
-	if (i < 1 || i > m->h - 2 || j < 1 || j > m->w - 2)
-		return (0);
-	// if (m->mapping[i][j] == '1' || m->mapping[i][j] == 'C')
-	// 	return (0);
-	(*node)->i = i;
-	(*node)->j = j;
-	return (1);
+	double	a;
+	double	b;
+
+	a = ft_pow((double)(i1 - i2), 2);
+	b = ft_pow((double)(j1 - j2), 2);
+	return (a + b);
 }
 
 void	enemy_movement(t_win *win, t_enemy **node, int i, int j)
@@ -32,22 +31,29 @@ void	enemy_movement(t_win *win, t_enemy **node, int i, int j)
 	double		d;
 
 	p = win->player;
-	a = ft_sqrt((ft_pow((double)(i - 1) - p->p_i, 2))
-			+ ft_pow((double)(j - p->p_j), 2)); //UP
-	b = ft_sqrt((ft_pow((double)(i + 1) - p->p_i, 2))
-			+ ft_pow((double)(j - p->p_j), 2)); //DOWN
-	c = ft_sqrt((ft_pow((double)(j - 1) - p->p_j, 2))
-			+ ft_pow((double)(i - p->p_i), 2)); //RIGHT
-	d = ft_sqrt((ft_pow((double)(j + 1) - p->p_j, 2))
-			+ ft_pow((double)(i - p->p_i), 2)); //LEFT
-	if (a < b && a <= c && a <= d && (*node)->direction != DOWN)
+	a = ft_sqrt(sum_pow(i - 1, p->p_i, j, p->p_j));
+	b = ft_sqrt(sum_pow(i + 1, p->p_i, j, p->p_j));
+	c = ft_sqrt(sum_pow(i, p->p_i, j - 1, p->p_j));
+	d = ft_sqrt(sum_pow(i, p->p_i, j + 1, p->p_j));
+	if (a < b && a <= c && a <= d && (*node)->direction != UP)
 		(*node)->direction = UP;
-	else if (b <= c && b <= d && (*node)->direction != UP)
+	else if (b <= c && b <= d && (*node)->direction != DOWN)
 		(*node)->direction = DOWN;
-	else if (c < d && (*node)->direction != LEFT)
+	else if (c < d)
 		(*node)->direction = LEFT;
-	else if ((*node)->direction != RIGHT)
+	else
 		(*node)->direction = RIGHT;
+}
+
+int	move_enemy(t_enemy **node, int i, int j, t_map *m)
+{
+	if (i < 1 || i > m->h - 2 || j < 1 || j > m->w - 2)
+		return (0);
+	// if (m->mapping[i][j] == '1' || m->mapping[i][j] == 'C')
+	// 	return (0);
+	(*node)->i = i;
+	(*node)->j = j;
+	return (1);
 }
 
 void	enemy_patrol(t_win *win)
@@ -61,7 +67,7 @@ void	enemy_patrol(t_win *win)
 	{
 		i = lst->i;
 		j = lst->j;
-		enemy_movement(win, &lst, win->player->p_i, win->player->p_i);
+		enemy_movement(win, &lst, i, j);
 		if (lst->direction == UP)
 			move_enemy(&lst, i - 1, j, win->map);
 		else if (lst->direction == DOWN)
