@@ -17,6 +17,7 @@
 # include "../Libft/get_next_line/get_next_line_bonus.h"
 # include <fcntl.h>
 # include <mlx.h>
+# include "keys.h"
 
 //events
 # define KEY_PRESS 2
@@ -27,6 +28,7 @@
 # define RIGHT 2
 # define UP 3
 # define DOWN 4
+
 //map feature
 # define WALL 1
 # define COIN 2

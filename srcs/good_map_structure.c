@@ -86,7 +86,8 @@ void	good_map_structure(t_map *map)
 	{
 		if (map->mapping[i][0] != '1' || map->mapping[i][map->w - 1] != '1')
 		{
-			ft_printf("ERROR !!!\nWrong map structure! (WALL) :: Line : %d\n", i);
+			ft_printf("ERROR !!!\n");
+			ft_printf("Map structure! (WALL) :: Line : %d\n", i);
 			free_map_exit(map);
 		}
 	}

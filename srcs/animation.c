@@ -57,6 +57,7 @@ void	health_bar_animation(int lives, t_anim *a, t_img *i)
 
 int	stop_animation(int keycode, t_win *win)
 {
+	(void) keycode;
 	if (win->player->is_moving)
 		win->player->is_moving = 0;
 	return (0);

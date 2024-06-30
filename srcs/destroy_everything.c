@@ -76,5 +76,6 @@ void	destroy_everything(t_win *win)
 	destroy_img(win);
 	destroy_img2(win);
 	destroy_enemy(win->enemy);
+	free(win->mlx);
 	free(win->player);
 }

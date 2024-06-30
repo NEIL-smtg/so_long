@@ -49,8 +49,6 @@ int	move_enemy(t_enemy **node, int i, int j, t_map *m)
 {
 	if (i < 1 || i > m->h - 2 || j < 1 || j > m->w - 2)
 		return (0);
-	// if (m->mapping[i][j] == '1' || m->mapping[i][j] == 'C')
-	// 	return (0);
 	(*node)->i = i;
 	(*node)->j = j;
 	return (1);

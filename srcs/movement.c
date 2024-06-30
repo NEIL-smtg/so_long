@@ -118,38 +118,9 @@ void	move_right(t_win *win)
 	refresh_screen(win);
 }
 
-// linux
-// int	key_on_pressed(int keycode, t_win *win)
-// {
-// 	if (keycode == 65307)
-// 	{
-// 		destroy_everything(win);
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	if (win->player->lives == 0)
-// 	{
-// 		ft_putstr_fd("You are dead !!\n", 1);
-// 		return (0);
-// 	}
-	// if (win->pause)
-	// 	return (0);
-// 	if (keycode == 'w' || keycode == 's' || keycode == 'a' || keycode == 'd')
-// 		win->player->is_moving = 1;
-// 	if (keycode == 'w')
-// 		move_up(win);
-// 	if (keycode == 's')
-// 		move_down(win);
-// 	if (keycode == 'a')
-// 		move_left(win);
-// 	if (keycode == 'd')
-// 		move_right(win);
-// 	return (0);
-// }
-
-//mac
 int	key_on_pressed(int keycode, t_win *win)
 {
-	if (keycode == 53)
+	if (keycode == KEY_ESC)
 	{
 		destroy_everything(win);
 		exit(EXIT_FAILURE);
@@ -161,15 +132,16 @@ int	key_on_pressed(int keycode, t_win *win)
 	}
 	if (win->pause)
 		return (0);
-	if (keycode == 13 || keycode == 1 || keycode == 0 || keycode == 2)
+	if (keycode == KEY_W || keycode == KEY_A || keycode == KEY_S
+		|| keycode == KEY_D)
 		win->player->is_moving = 1;
-	if (keycode == 13)
+	if (keycode == KEY_W)
 		move_up(win);
-	if (keycode == 1)
+	else if (keycode == KEY_S)
 		move_down(win);
-	if (keycode == 0)
+	else if (keycode == KEY_A)
 		move_left(win);
-	if (keycode == 2)
+	else if (keycode == KEY_D)
 		move_right(win);
 	return (0);
 }

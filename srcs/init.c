@@ -99,5 +99,6 @@ void	init(t_win *win, int *x, int *y)
 	win->player->lives = 3;
 	win->player->steps = 0;
 	win->player->is_moving = 0;
+	win->enemy = NULL;
 	init_imgs(win, x, y);
 }

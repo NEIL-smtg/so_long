@@ -31,7 +31,7 @@ void	check_len(t_map *map)
 	i = 0;
 	while (map->mapping[++i])
 	{
-		if (ft_strlen(map->mapping[i]) != map->w)
+		if (ft_strlen(map->mapping[i]) != (size_t) map->w)
 		{
 			ft_printf("Error !!!\nInvalid map! (length)\n");
 			free_map_exit(map);
