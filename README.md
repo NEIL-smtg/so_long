@@ -1,6 +1,8 @@
 # SO_LONGGGGG
 A 2d game that is similar to pacman
 
+![Gameplay in linux](https://github.com/NEIL-smtg/so_long/blob/main/demo.gif)
+
 Compile the files and execute with the following command:
 ```
 make && ./so_long <path_to_map>
@@ -30,9 +32,9 @@ N = ENEMY
 ```
 
 # Please make sure your map is:
+```
 1. in .ber format
 2. map has to be in rectangle shape and cover with '1' (wall)
 3. At least 1 'C' (coin) and 'E' (exit)
 4. Only 1 'P' (Player)
-
-![Gameplay in linux](https://github.com/NEIL-smtg/so_long/blob/main/demo.gif)
+```
